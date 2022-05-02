@@ -5,7 +5,10 @@ import {
   REMOVE_PRODUCT,
   ProductActions,
   Product,
+  Products,
+  ADD_PRODUCTS,
 } from '../../types'
+import { API_URL } from 'utils/constants'
 
 export function addProduct(product: Product): ProductActions {
   return {
@@ -25,13 +28,23 @@ export function removeProduct(product: Product): ProductActions {
   }
 }
 
+export function addProducts(products: Products): ProductActions {
+  return {
+    type: ADD_PRODUCTS,
+    payload: {
+      products,
+    },
+  }
+}
+
 // An Example of Async action processed by redux-thunk middleware
-export function fetchProduct(productId: string) {
-  return (dispatch: Dispatch) => {
-    return fetch(`products/${productId}`)
-      .then(resp => resp.json())
-      .then(product => {
-        dispatch(addProduct(product))
+export function fetchProducts() {
+  // TODO: improve
+  return function (dispatch: Dispatch) {
+    return fetch(`${API_URL}/v3.1/all`)
+      .then((resp) => resp.json())
+      .then((products) => {
+        dispatch(addProducts(products))
       })
   }
 }

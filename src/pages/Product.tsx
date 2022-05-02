@@ -8,7 +8,7 @@ export default function Product() {
   const { id } = useParams<{ id: string }>()
 
   const product = useSelector((state: AppState) =>
-    state.product.inCart.find((p) => p.id === id)
+    state.product.countries.find((p) => p.cca3 === id)
   )
 
   if (!product) {
@@ -18,7 +18,7 @@ export default function Product() {
   return (
     <>
       <h1>Product page</h1>
-      <h2>{`${product.name} - $${product.price}`}</h2>
+      <h2>{`${product.name} - ${product.population}`}</h2>
     </>
   )
 }
