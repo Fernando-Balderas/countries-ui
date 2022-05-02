@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
@@ -9,9 +9,9 @@ export default function Home() {
   const dispatch = useDispatch()
   const product = useSelector((state: AppState) => state.product)
 
-  const handleAddProduct = () => {
+  useEffect(() => {
     dispatch(fetchProducts())
-  }
+  }, [dispatch])
 
   return (
     <>
@@ -26,7 +26,6 @@ export default function Home() {
           </li>
         ))}
       </ul>
-      <button onClick={handleAddProduct}>Load products</button>
       <h2>Available Countries</h2>
       <ul>
         {product.countries.map((c) => (
