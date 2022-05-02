@@ -19,23 +19,32 @@ export default function product(
     if (state.inCart.find((p) => p.cca3 === product.cca3)) {
       return state
     }
+    const index = state.countries.findIndex((c) => c.cca3 === product.cca3)
+    if (index === -1) return state
+    const [first] = state.countries.splice(index, 1)
     // Always return new state (e.g, new object) if changed
-    return { ...state, inCart: [...state.inCart, product] }
+    return {
+      countries: [...state.countries],
+      inCart: [...state.inCart, first],
+    }
   }
 
   case REMOVE_PRODUCT: {
     const { product } = action.payload
     const index = state.inCart.findIndex((p) => p.cca3 === product.cca3)
-    if (index >= 0) {
-      state.inCart.splice(index, 1)
-      return { ...state, inCart: [...state.inCart] }
+    if (index === -1) return state
+    const [first] = state.inCart.splice(index, 1)
+    // TODO: sort array of countries again
+    return {
+      countries: [...state.countries, first],
+      inCart: [...state.inCart],
     }
-    return state
   }
 
-  case ADD_PRODUCTS:
+  case ADD_PRODUCTS: {
     const { products } = action.payload
     return { ...state, countries: products }
+  }
 
   default:
     return state

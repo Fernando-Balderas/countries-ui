@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 import { AppState } from '../types'
-import { fetchProducts, removeProduct } from '../redux/actions'
+import { fetchProducts, addProduct, removeProduct } from '../redux/actions'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ export default function Home() {
         {product.inCart.map((p) => (
           <li key={`t-${p.cca3}`}>
             {p.name.common}
-            <button>Remove</button>
+            <button onClick={() => dispatch(removeProduct(p))}>Remove</button>
           </li>
         ))}
       </ul>
@@ -32,7 +32,7 @@ export default function Home() {
           <li key={c.cca3}>
             {c.flag}
             <Link to={`/products/${c.cca3}`}>{`${c.name.common}`}</Link>
-            <button onClick={() => dispatch(removeProduct(c))}>Add</button>
+            <button onClick={() => dispatch(addProduct(c))}>Add</button>
           </li>
         ))}
       </ul>
