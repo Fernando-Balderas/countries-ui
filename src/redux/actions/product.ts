@@ -10,6 +10,8 @@ import {
   SORT_PRODUCTS,
   SortBy,
   UPDATE_SORT_BY,
+  SortAscDesc,
+  UPDATE_SORT_ASC_DESC,
 } from '../../types'
 import { API_URL } from 'utils/constants'
 
@@ -51,6 +53,15 @@ export function updateSortBy(sortBy: SortBy): ProductActions {
     type: UPDATE_SORT_BY,
     payload: {
       sortBy,
+    },
+  }
+}
+
+export function updateSortAscDesc(sortAscDesc: SortAscDesc): ProductActions {
+  return {
+    type: UPDATE_SORT_ASC_DESC,
+    payload: {
+      sortAscDesc,
     },
   }
 }

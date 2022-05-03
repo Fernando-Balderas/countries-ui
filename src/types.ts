@@ -4,6 +4,7 @@ export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
 export const ADD_PRODUCTS = 'ADD_PRODUCTS'
 export const SORT_PRODUCTS = 'SORT_PRODUCTS'
 export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
+export const UPDATE_SORT_ASC_DESC = 'UPDATE_SORT_ASC_DESC'
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
 export enum DialogType {
@@ -50,7 +51,9 @@ export type Product = {
 }
 
 export type Products = Product[]
+
 export type SortBy = keyof Product
+export type SortAscDesc = 'ASC' | 'DESC'
 
 export type AddProductAction = {
   type: typeof ADD_PRODUCT
@@ -84,6 +87,13 @@ export type UpdateSortBy = {
   }
 }
 
+export type UpdateSortAscDesc = {
+  type: typeof UPDATE_SORT_ASC_DESC
+  payload: {
+    sortAscDesc: SortAscDesc
+  }
+}
+
 export type ToggleDialogAction = {
   type: typeof TOGGLE_DIALOG
   payload: {
@@ -100,11 +110,13 @@ export type ProductActions =
   | AddProductsAction
   | SortProductsAction
   | UpdateSortBy
+  | UpdateSortAscDesc
 
 export type ProductState = {
   countries: Products
   inCart: Products
   sortBy: SortBy
+  sortAscDesc: SortAscDesc
 }
 
 // Using dynamic keys from an enum

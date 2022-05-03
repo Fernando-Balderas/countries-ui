@@ -6,6 +6,7 @@ import {
   ADD_PRODUCTS,
   SORT_PRODUCTS,
   UPDATE_SORT_BY,
+  UPDATE_SORT_ASC_DESC,
 } from '../../types'
 
 import { sortCountriesByCriteria } from '../../utils/services'
@@ -14,6 +15,7 @@ export const defaultProductState: ProductState = {
   countries: [],
   inCart: [],
   sortBy: 'name',
+  sortAscDesc: 'ASC',
 }
 
 export default function product(
@@ -42,10 +44,11 @@ export default function product(
     const index = state.inCart.findIndex((p) => p.cca3 === product.cca3)
     if (index === -1) return state
     const [first] = state.inCart.splice(index, 1)
-    // TODO: sort array of countries again
+    // TODO: Possible improvement using selectors
     const sorted = sortCountriesByCriteria(
       [...state.countries, first],
-      state.sortBy
+      state.sortBy,
+      state.sortAscDesc
     )
     return {
       ...state,
@@ -60,13 +63,24 @@ export default function product(
   }
 
   case SORT_PRODUCTS: {
-    const sorted = sortCountriesByCriteria(state.countries, state.sortBy)
+    const sorted = sortCountriesByCriteria(
+      state.countries,
+      state.sortBy,
+      state.sortAscDesc
+    )
     return { ...state, countries: sorted }
   }
 
   case UPDATE_SORT_BY: {
     const { sortBy } = action.payload
+    if (state.sortBy === sortBy) return state
     return { ...state, sortBy: sortBy }
+  }
+
+  case UPDATE_SORT_ASC_DESC: {
+    const { sortAscDesc } = action.payload
+    if (state.sortAscDesc === sortAscDesc) return state
+    return { ...state, sortAscDesc: sortAscDesc }
   }
 
   default:

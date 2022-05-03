@@ -1,32 +1,31 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { AppState, SortBy } from '../types'
+import { AppState, SortBy, SortAscDesc } from '../types'
 import {
   fetchProducts,
   addProduct,
   removeProduct,
   sortProducts,
   updateSortBy,
+  updateSortAscDesc,
 } from '../redux/actions'
 
 export default function Home() {
   const dispatch = useDispatch()
-  const { countries, inCart } = useSelector((state: AppState) => state.product)
+  const { countries, inCart, sortBy, sortAscDesc } = useSelector(
+    (state: AppState) => state.product
+  )
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
 
-  const handleSortBy = useCallback(
-    (sortBy: SortBy) => {
-      // TODO: Possible improvement using selectors
-      dispatch(updateSortBy(sortBy))
-      dispatch(sortProducts())
-    },
-    [dispatch]
-  )
+  useEffect(() => {
+    // TODO: Possible improvement using selectors
+    dispatch(sortProducts())
+  }, [dispatch, sortBy, sortAscDesc])
 
   return (
     <>
@@ -44,11 +43,20 @@ export default function Home() {
       <h2>Available Countries</h2>
       <select
         id="sortBy"
-        onBlur={(e) => handleSortBy(e.target.value as SortBy)}
+        onBlur={(e) => dispatch(updateSortBy(e.target.value as SortBy))}
       >
         <option value="name">Name</option>
         <option value="area">Area</option>
         <option value="population">Population</option>
+      </select>
+      <select
+        id="sortAscDesc"
+        onBlur={(e) =>
+          dispatch(updateSortAscDesc(e.target.value as SortAscDesc))
+        }
+      >
+        <option value="ASC">Asc</option>
+        <option value="DESC">Desc</option>
       </select>
       <ul>
         {countries.map((c) => (
