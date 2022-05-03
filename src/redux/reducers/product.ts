@@ -4,13 +4,20 @@ import {
   ADD_PRODUCT,
   REMOVE_PRODUCT,
   ADD_PRODUCTS,
+  SORT_PRODUCTS,
+  UPDATE_SORT_BY,
 } from '../../types'
 
+import { sortCountriesByCriteria } from '../../utils/services'
+
+export const defaultProductState: ProductState = {
+  countries: [],
+  inCart: [],
+  sortBy: 'name',
+}
+
 export default function product(
-  state: ProductState = {
-    countries: [],
-    inCart: [],
-  },
+  state: ProductState = defaultProductState,
   action: ProductActions
 ): ProductState {
   switch (action.type) {
@@ -24,6 +31,7 @@ export default function product(
     const [first] = state.countries.splice(index, 1)
     // Always return new state (e.g, new object) if changed
     return {
+      ...state,
       countries: [...state.countries],
       inCart: [...state.inCart, first],
     }
@@ -35,8 +43,13 @@ export default function product(
     if (index === -1) return state
     const [first] = state.inCart.splice(index, 1)
     // TODO: sort array of countries again
+    const sorted = sortCountriesByCriteria(
+      [...state.countries, first],
+      state.sortBy
+    )
     return {
-      countries: [...state.countries, first],
+      ...state,
+      countries: sorted,
       inCart: [...state.inCart],
     }
   }
@@ -44,6 +57,16 @@ export default function product(
   case ADD_PRODUCTS: {
     const { products } = action.payload
     return { ...state, countries: products }
+  }
+
+  case SORT_PRODUCTS: {
+    const sorted = sortCountriesByCriteria(state.countries, state.sortBy)
+    return { ...state, countries: sorted }
+  }
+
+  case UPDATE_SORT_BY: {
+    const { sortBy } = action.payload
+    return { ...state, sortBy: sortBy }
   }
 
   default:

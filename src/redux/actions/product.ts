@@ -7,6 +7,9 @@ import {
   Product,
   Products,
   ADD_PRODUCTS,
+  SORT_PRODUCTS,
+  SortBy,
+  UPDATE_SORT_BY,
 } from '../../types'
 import { API_URL } from 'utils/constants'
 
@@ -37,7 +40,22 @@ export function addProducts(products: Products): ProductActions {
   }
 }
 
-// An Example of Async action processed by redux-thunk middleware
+export function sortProducts(): ProductActions {
+  return {
+    type: SORT_PRODUCTS,
+  }
+}
+
+export function updateSortBy(sortBy: SortBy): ProductActions {
+  return {
+    type: UPDATE_SORT_BY,
+    payload: {
+      sortBy,
+    },
+  }
+}
+
+// Async action processed by redux-thunk middleware
 export function fetchProducts() {
   // TODO: improve
   return function (dispatch: Dispatch) {
@@ -46,5 +64,6 @@ export function fetchProducts() {
       .then((products) => {
         dispatch(addProducts(products))
       })
+      .then(() => dispatch(sortProducts()))
   }
 }

@@ -6,14 +6,11 @@ import { AppState } from '../types'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
 
+import { defaultProductState, defaultUiState } from './reducers'
+
 const initState: AppState = {
-  product: {
-    countries: [],
-    inCart: [],
-  },
-  ui: {
-    dialogOpen: {},
-  },
+  product: defaultProductState,
+  ui: defaultUiState,
 }
 
 export default function makeStore(initialState = initState) {

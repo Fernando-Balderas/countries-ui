@@ -1,11 +1,11 @@
 import { TOGGLE_DIALOG, UiState, UiActions } from '../../types'
 
-const defaultState: UiState = {
+export const defaultUiState: UiState = {
   dialogOpen: {},
 }
 
 export default function ui(
-  state: UiState = defaultState,
+  state: UiState = defaultUiState,
   action: UiActions
 ): UiState {
   switch (action.type) {
