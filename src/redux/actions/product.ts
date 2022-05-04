@@ -12,6 +12,9 @@ import {
   UPDATE_SORT_BY,
   SortAscDesc,
   UPDATE_SORT_ASC_DESC,
+  Query,
+  FILTER_PRODUCTS,
+  UPDATE_QUERY,
 } from '../../types'
 import { API_URL } from 'utils/constants'
 
@@ -66,6 +69,21 @@ export function updateSortAscDesc(sortAscDesc: SortAscDesc): ProductActions {
   }
 }
 
+export function updateQuery(query: Query): ProductActions {
+  return {
+    type: UPDATE_QUERY,
+    payload: {
+      query,
+    },
+  }
+}
+
+export function filterProducts(): ProductActions {
+  return {
+    type: FILTER_PRODUCTS,
+  }
+}
+
 // Async action processed by redux-thunk middleware
 export function fetchProducts() {
   // TODO: improve
@@ -75,6 +93,7 @@ export function fetchProducts() {
       .then((products) => {
         dispatch(addProducts(products))
       })
+      .then(() => dispatch(filterProducts()))
       .then(() => dispatch(sortProducts()))
   }
 }

@@ -1,4 +1,4 @@
-import { Products, SortAscDesc, SortBy } from 'types'
+import { CountryName, Products, Query, SortAscDesc, SortBy } from 'types'
 
 type Value = string | number
 
@@ -27,4 +27,23 @@ export function sortCountriesByCriteria(
   return [...arr].sort((a, b) =>
     compareFn(a[sortBy] as Value, b[sortBy] as Value, sortAscDesc)
   )
+}
+
+function includesQuery(v: string, query: Query) {
+  return v.toLowerCase().includes(query.toLowerCase())
+}
+
+export function filterCountriesByQuery(arr: Products, query: Query) {
+  return [...arr].filter((el) => {
+    const found = Object.entries(el).filter(([k, v]) => {
+      if (k === 'name') {
+        const { common } = v as CountryName
+        return includesQuery(common, query)
+      }
+      // TODO: Find matches in entries with objects and arrays
+      if (typeof v !== 'string') return false
+      return includesQuery(v, query)
+    })
+    return found.length > 0 ? true : false
+  })
 }

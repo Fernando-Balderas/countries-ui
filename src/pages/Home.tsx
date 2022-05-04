@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { AppState, SortBy, SortAscDesc } from '../types'
+import { AppState, SortBy, SortAscDesc, Query } from '../types'
 import {
   fetchProducts,
   addProduct,
@@ -10,17 +10,24 @@ import {
   sortProducts,
   updateSortBy,
   updateSortAscDesc,
+  updateQuery,
+  filterProducts,
 } from '../redux/actions'
 
 export default function Home() {
   const dispatch = useDispatch()
-  const { countries, inCart, sortBy, sortAscDesc } = useSelector(
+  const { filtered, inCart, query, sortBy, sortAscDesc } = useSelector(
     (state: AppState) => state.product
   )
 
   useEffect(() => {
     dispatch(fetchProducts())
   }, [dispatch])
+
+  useEffect(() => {
+    dispatch(filterProducts())
+    dispatch(sortProducts())
+  }, [dispatch, query])
 
   useEffect(() => {
     // TODO: Possible improvement using selectors
@@ -41,6 +48,11 @@ export default function Home() {
         ))}
       </ul>
       <h2>Available Countries</h2>
+      <input
+        type="text"
+        id="search"
+        onChange={(e) => dispatch(updateQuery(e.target.value as Query))}
+      />
       <select
         id="sortBy"
         onBlur={(e) => dispatch(updateSortBy(e.target.value as SortBy))}
@@ -59,7 +71,7 @@ export default function Home() {
         <option value="DESC">Desc</option>
       </select>
       <ul>
-        {countries.map((c) => (
+        {filtered.map((c) => (
           <li key={c.cca3}>
             {c.flag}
             <Link to={`/products/${c.cca3}`}>{`${c.name.common}`}</Link>

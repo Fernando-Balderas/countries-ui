@@ -5,6 +5,8 @@ export const ADD_PRODUCTS = 'ADD_PRODUCTS'
 export const SORT_PRODUCTS = 'SORT_PRODUCTS'
 export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
 export const UPDATE_SORT_ASC_DESC = 'UPDATE_SORT_ASC_DESC'
+export const UPDATE_QUERY = 'UPDATE_QUERY'
+export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
 export enum DialogType {
@@ -12,10 +14,12 @@ export enum DialogType {
   SignUp = 'signUp',
 }
 
+export type CountryName = { common: string; official: string; nativeName: {} }
+
 export type Product = {
   cca3: string
   population: number
-  name: { common: string; official: string; nativeName: {} }
+  name: CountryName
   flag: string
   languages: {}
   area: number
@@ -53,7 +57,10 @@ export type Product = {
 export type Products = Product[]
 
 export type SortBy = keyof Product
+
 export type SortAscDesc = 'ASC' | 'DESC'
+
+export type Query = string
 
 export type AddProductAction = {
   type: typeof ADD_PRODUCT
@@ -94,6 +101,17 @@ export type UpdateSortAscDesc = {
   }
 }
 
+export type UpdateQuery = {
+  type: typeof UPDATE_QUERY
+  payload: {
+    query: Query
+  }
+}
+
+export type FilterProducts = {
+  type: typeof FILTER_PRODUCTS
+}
+
 export type ToggleDialogAction = {
   type: typeof TOGGLE_DIALOG
   payload: {
@@ -111,12 +129,16 @@ export type ProductActions =
   | SortProductsAction
   | UpdateSortBy
   | UpdateSortAscDesc
+  | UpdateQuery
+  | FilterProducts
 
 export type ProductState = {
   countries: Products
   inCart: Products
   sortBy: SortBy
   sortAscDesc: SortAscDesc
+  query: Query
+  filtered: Products
 }
 
 // Using dynamic keys from an enum

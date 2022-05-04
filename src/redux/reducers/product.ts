@@ -7,15 +7,22 @@ import {
   SORT_PRODUCTS,
   UPDATE_SORT_BY,
   UPDATE_SORT_ASC_DESC,
+  FILTER_PRODUCTS,
+  UPDATE_QUERY,
 } from '../../types'
 
-import { sortCountriesByCriteria } from '../../utils/services'
+import {
+  filterCountriesByQuery,
+  sortCountriesByCriteria,
+} from '../../utils/services'
 
 export const defaultProductState: ProductState = {
   countries: [],
   inCart: [],
   sortBy: 'name',
   sortAscDesc: 'ASC',
+  query: '',
+  filtered: [],
 }
 
 export default function product(
@@ -28,13 +35,13 @@ export default function product(
     if (state.inCart.find((p) => p.cca3 === product.cca3)) {
       return state
     }
-    const index = state.countries.findIndex((c) => c.cca3 === product.cca3)
+    const index = state.filtered.findIndex((c) => c.cca3 === product.cca3)
     if (index === -1) return state
-    const [first] = state.countries.splice(index, 1)
+    const [first] = state.filtered.splice(index, 1)
     // Always return new state (e.g, new object) if changed
     return {
       ...state,
-      countries: [...state.countries],
+      filtered: [...state.filtered],
       inCart: [...state.inCart, first],
     }
   }
@@ -46,13 +53,13 @@ export default function product(
     const [first] = state.inCart.splice(index, 1)
     // TODO: Possible improvement using selectors
     const sorted = sortCountriesByCriteria(
-      [...state.countries, first],
+      [...state.filtered, first],
       state.sortBy,
       state.sortAscDesc
     )
     return {
       ...state,
-      countries: sorted,
+      filtered: sorted,
       inCart: [...state.inCart],
     }
   }
@@ -64,11 +71,11 @@ export default function product(
 
   case SORT_PRODUCTS: {
     const sorted = sortCountriesByCriteria(
-      state.countries,
+      state.filtered,
       state.sortBy,
       state.sortAscDesc
     )
-    return { ...state, countries: sorted }
+    return { ...state, filtered: sorted }
   }
 
   case UPDATE_SORT_BY: {
@@ -81,6 +88,19 @@ export default function product(
     const { sortAscDesc } = action.payload
     if (state.sortAscDesc === sortAscDesc) return state
     return { ...state, sortAscDesc: sortAscDesc }
+  }
+
+  case UPDATE_QUERY: {
+    const { query } = action.payload
+    if (state.query === query) return state
+    return { ...state, query }
+  }
+
+  case FILTER_PRODUCTS: {
+    if (state.query === '')
+      return { ...state, filtered: [...state.countries] }
+    const filtered = filterCountriesByQuery(state.filtered, state.query)
+    return { ...state, filtered }
   }
 
   default:
