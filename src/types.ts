@@ -7,12 +7,9 @@ export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
 export const UPDATE_SORT_ASC_DESC = 'UPDATE_SORT_ASC_DESC'
 export const UPDATE_QUERY = 'UPDATE_QUERY'
 export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
-export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
-export enum DialogType {
-  SignIn = 'signIn',
-  SignUp = 'signUp',
-}
+export const UPDATE_THEME_KEY = 'UPDATE_THEME_KEY'
+export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
 export type CountryName = { common: string; official: string; nativeName: {} }
 
@@ -69,6 +66,55 @@ export type AddProductAction = {
   }
 }
 
+export enum ThemeColors {
+  Dark = 'dark',
+  Light = 'light',
+  Yellow = 'yellow',
+  Orange = 'orange',
+  Red = 'red',
+  Blue = 'blue',
+  Green = 'green',
+  Purple = 'purple',
+}
+
+export type Theme = {
+  foreground: string
+  background: string
+}
+
+export type Themes = {
+  [key in ThemeColors]: Theme
+}
+
+export type ThemeKey = keyof Themes
+
+export enum DialogType {
+  SignIn = 'signIn',
+  SignUp = 'signUp',
+}
+
+export type ProductState = {
+  countries: Products
+  inCart: Products
+  sortBy: SortBy
+  sortAscDesc: SortAscDesc
+  query: Query
+  filtered: Products
+}
+
+// Using dynamic keys from an enum
+export type UiState = {
+  themeKey: ThemeKey
+  dialogOpen: {
+    [key in DialogType]?: boolean
+  }
+}
+
+export type AppState = {
+  product: ProductState
+  ui: UiState
+}
+
 export type RemoveProductAction = {
   type: typeof REMOVE_PRODUCT
   payload: {
@@ -112,15 +158,6 @@ export type FilterProducts = {
   type: typeof FILTER_PRODUCTS
 }
 
-export type ToggleDialogAction = {
-  type: typeof TOGGLE_DIALOG
-  payload: {
-    dialog: DialogType
-  }
-}
-
-export type UiActions = ToggleDialogAction
-
 // Use this union in reducer
 export type ProductActions =
   | AddProductAction
@@ -132,23 +169,18 @@ export type ProductActions =
   | UpdateQuery
   | FilterProducts
 
-export type ProductState = {
-  countries: Products
-  inCart: Products
-  sortBy: SortBy
-  sortAscDesc: SortAscDesc
-  query: Query
-  filtered: Products
-}
-
-// Using dynamic keys from an enum
-export type UiState = {
-  dialogOpen: {
-    [key in DialogType]?: boolean
+export type UpdateThemeKeyAction = {
+  type: typeof UPDATE_THEME_KEY
+  payload: {
+    themeKey: ThemeKey
   }
 }
 
-export type AppState = {
-  product: ProductState
-  ui: UiState
+export type ToggleDialogAction = {
+  type: typeof TOGGLE_DIALOG
+  payload: {
+    dialog: DialogType
+  }
 }
+
+export type UiActions = ToggleDialogAction | UpdateThemeKeyAction

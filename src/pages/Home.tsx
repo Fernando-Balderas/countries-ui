@@ -14,6 +14,8 @@ import {
   filterProducts,
 } from '../redux/actions'
 
+import Nav from 'components/Nav'
+
 export default function Home() {
   const dispatch = useDispatch()
   const { filtered, inCart, query, sortBy, sortAscDesc } = useSelector(
@@ -36,6 +38,7 @@ export default function Home() {
 
   return (
     <>
+      <Nav />
       <h1>Home page</h1>
       <h2>Cart</h2>
       {inCart.length <= 0 && <div>No products in cart</div>}
@@ -55,6 +58,7 @@ export default function Home() {
       />
       <select
         id="sortBy"
+        defaultValue={sortBy}
         onBlur={(e) => dispatch(updateSortBy(e.target.value as SortBy))}
       >
         <option value="name">Name</option>
@@ -63,6 +67,7 @@ export default function Home() {
       </select>
       <select
         id="sortAscDesc"
+        defaultValue={sortAscDesc}
         onBlur={(e) =>
           dispatch(updateSortAscDesc(e.target.value as SortAscDesc))
         }

@@ -1,6 +1,13 @@
-import { TOGGLE_DIALOG, UiState, UiActions } from '../../types'
+import {
+  TOGGLE_DIALOG,
+  UiState,
+  UiActions,
+  UPDATE_THEME_KEY,
+  ThemeColors,
+} from '../../types'
 
 export const defaultUiState: UiState = {
+  themeKey: ThemeColors.Dark,
   dialogOpen: {},
 }
 
@@ -9,6 +16,11 @@ export default function ui(
   action: UiActions
 ): UiState {
   switch (action.type) {
+  case UPDATE_THEME_KEY: {
+    const { themeKey } = action.payload
+    return { ...state, themeKey }
+  }
+
   case TOGGLE_DIALOG: {
     return {
       ...state,
