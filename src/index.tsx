@@ -7,6 +7,8 @@ import App from './App'
 import * as serviceWorker from './serviceWorker'
 import makeStore from './redux/store'
 
+import 'bootstrap/dist/css/bootstrap.min.css'
+
 const store = makeStore()
 
 const WithProvider = () => (

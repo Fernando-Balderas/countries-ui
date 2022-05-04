@@ -14,6 +14,7 @@ import {
   filterProducts,
 } from '../redux/actions'
 
+import Button from 'react-bootstrap/Button'
 import Nav from 'components/Nav'
 
 export default function Home() {
@@ -39,6 +40,7 @@ export default function Home() {
   return (
     <>
       <Nav />
+
       <h1>Home page</h1>
       <h2>Cart</h2>
       {inCart.length <= 0 && <div>No products in cart</div>}
@@ -81,7 +83,7 @@ export default function Home() {
             {c.flag}
             <Link to={`/products/${c.cca3}`}>{`${c.name.common}`}</Link>
             {` ${c.area} - ${c.population}`}
-            <button onClick={() => dispatch(addProduct(c))}>Add</button>
+            <Button onClick={() => dispatch(addProduct(c))}>Add</Button>
           </li>
         ))}
       </ul>
