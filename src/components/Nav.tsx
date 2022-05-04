@@ -5,15 +5,18 @@ import ThemeContext from 'contexts/Theme'
 
 import { ThemeKey, ThemeColors, AppState } from 'types'
 
+import { FaGlobeEurope, FaShoppingCart, FaPalette } from 'react-icons/fa'
+
 function Nav() {
   const theme = useContext(ThemeContext)
   const dispatch = useDispatch()
   const { themeKey } = useSelector((state: AppState) => state.ui)
   return (
     <nav style={{ background: theme.background, color: theme.foreground }}>
-      Nav
+      <FaGlobeEurope />
       <ul>
         <li>
+          <FaPalette />
           <select
             id="themes"
             defaultValue={themeKey}
@@ -25,6 +28,9 @@ function Nav() {
               </option>
             ))}
           </select>
+        </li>
+        <li>
+          <FaShoppingCart />
         </li>
       </ul>
     </nav>
