@@ -40,10 +40,16 @@ export function filterCountriesByQuery(arr: Products, query: Query) {
         const { common } = v as CountryName
         return includesQuery(common, query)
       }
-      // TODO: Find matches in entries with objects and arrays
+      // TODO: Find matches in objects and arrays. For instance with languages.
       if (typeof v !== 'string') return false
       return includesQuery(v, query)
     })
     return found.length > 0 ? true : false
   })
+}
+
+export function pickSome(arr: string[], limit: number) {
+  const len = arr.length
+  if (len <= limit) return arr
+  else return [...arr.slice(0, limit), `${len - limit} more`]
 }

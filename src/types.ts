@@ -13,12 +13,16 @@ export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
 export type CountryName = { common: string; official: string; nativeName: {} }
 
+export type Languages = {
+  [key: string]: string
+}
+
 export type Product = {
   cca3: string
   population: number
   name: CountryName
   flag: string
-  languages: {}
+  languages: Languages
   area: number
   borders: string[]
   capital: string[]
