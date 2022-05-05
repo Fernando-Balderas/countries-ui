@@ -4,6 +4,12 @@ import { useSelector } from 'react-redux'
 
 import { AppState } from '../types'
 
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import NavBar from 'components/NavBar'
+import ProductCard from 'components/ProductCard'
+
 export default function Product() {
   const { id } = useParams<{ id: string }>()
 
@@ -17,8 +23,14 @@ export default function Product() {
 
   return (
     <>
-      <h1>Product page</h1>
-      <h2>{`${product.name} - ${product.population}`}</h2>
+      <NavBar />
+      <Container>
+        <Row className="justify-content-md-center">
+          <Col xs lg="6">
+            <ProductCard product={product} />
+          </Col>
+        </Row>
+      </Container>
     </>
   )
 }

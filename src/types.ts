@@ -17,6 +17,15 @@ export type Languages = {
   [key: string]: string
 }
 
+export type Currency = {
+  name: string
+  symbol: string
+}
+
+export type Currencies = {
+  [key: string]: Currency
+}
+
 export type Product = {
   cca3: string
   population: number
@@ -29,7 +38,7 @@ export type Product = {
   capitalInfo: { latlng: any[] }
   continents: string[]
   region: string
-  currencies: {}
+  currencies: Currencies
   flags: { png: string; svg: string }
   coatOfArms: { png: string; svg: string }
   latlng: [number, number]
