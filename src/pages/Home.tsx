@@ -15,7 +15,7 @@ import {
 } from '../redux/actions'
 
 import Button from 'react-bootstrap/Button'
-import Nav from 'components/Nav'
+import NavBar from 'components/NavBar'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -39,7 +39,7 @@ export default function Home() {
 
   return (
     <>
-      <Nav />
+      <NavBar />
 
       <h1>Home page</h1>
       <h2>Cart</h2>
