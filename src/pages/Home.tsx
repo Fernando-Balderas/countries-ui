@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux'
 import { AppState, SortBy, SortAscDesc, Query } from '../types'
 import {
   fetchProducts,
-  removeProduct,
   sortProducts,
   updateSortBy,
   updateSortAscDesc,
@@ -15,8 +14,10 @@ import {
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
+
 import NavBar from 'components/NavBar'
 import CustomTable from 'components/CustomTable'
+import Cart from 'components/Cart'
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -41,11 +42,11 @@ export default function Home() {
   return (
     <>
       <NavBar />
+      <Cart inCart={inCart} />
       <Container fluid>
-        <h1>Home page</h1>
         <Row>
-          <Col>
-            <h2>Available Countries</h2>
+          <Col lg={10} className="mx-auto">
+            <h1>Countries</h1>
             <input
               type="text"
               id="search"
@@ -72,20 +73,6 @@ export default function Home() {
               <option value="DESC">Desc</option>
             </select>
             <CustomTable products={filtered} />
-          </Col>
-          <Col lg={4}>
-            <h2>Cart</h2>
-            {inCart.length <= 0 && <div>No products in cart</div>}
-            <ul>
-              {inCart.map((p) => (
-                <li key={`t-${p.cca3}`}>
-                  {p.name.common}
-                  <button onClick={() => dispatch(removeProduct(p))}>
-                    Remove
-                  </button>
-                </li>
-              ))}
-            </ul>
           </Col>
         </Row>
       </Container>

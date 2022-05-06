@@ -4,6 +4,8 @@ import {
   DialogType,
   UPDATE_THEME_KEY,
   ThemeKey,
+  UPDATE_CART_OPEN,
+  CartOpen,
 } from '../../types'
 
 export function updateThemeKey(themeKey: ThemeKey): UiActions {
@@ -11,6 +13,15 @@ export function updateThemeKey(themeKey: ThemeKey): UiActions {
     type: UPDATE_THEME_KEY,
     payload: {
       themeKey,
+    },
+  }
+}
+
+export function updateCartOpen(cartOpen: CartOpen): UiActions {
+  return {
+    type: UPDATE_CART_OPEN,
+    payload: {
+      cartOpen,
     },
   }
 }

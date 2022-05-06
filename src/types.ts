@@ -9,6 +9,7 @@ export const UPDATE_QUERY = 'UPDATE_QUERY'
 export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
 
 export const UPDATE_THEME_KEY = 'UPDATE_THEME_KEY'
+export const UPDATE_CART_OPEN = 'UPDATE_CART_OPEN'
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
 export type CountryName = { common: string; official: string; nativeName: {} }
@@ -72,13 +73,6 @@ export type SortAscDesc = 'ASC' | 'DESC'
 
 export type Query = string
 
-export type AddProductAction = {
-  type: typeof ADD_PRODUCT
-  payload: {
-    product: Product
-  }
-}
-
 export enum ThemeColors {
   Dark = 'dark',
   Light = 'light',
@@ -101,6 +95,8 @@ export type Themes = {
 
 export type ThemeKey = keyof Themes
 
+export type CartOpen = boolean
+
 export enum DialogType {
   SignIn = 'signIn',
   SignUp = 'signUp',
@@ -118,6 +114,7 @@ export type ProductState = {
 // Using dynamic keys from an enum
 export type UiState = {
   themeKey: ThemeKey
+  cartOpen: CartOpen
   dialogOpen: {
     [key in DialogType]?: boolean
   }
@@ -126,6 +123,13 @@ export type UiState = {
 export type AppState = {
   product: ProductState
   ui: UiState
+}
+
+export type AddProductAction = {
+  type: typeof ADD_PRODUCT
+  payload: {
+    product: Product
+  }
 }
 
 export type RemoveProductAction = {
@@ -189,6 +193,13 @@ export type UpdateThemeKeyAction = {
   }
 }
 
+export type UpdateCartOpen = {
+  type: typeof UPDATE_CART_OPEN
+  payload: {
+    cartOpen: CartOpen
+  }
+}
+
 export type ToggleDialogAction = {
   type: typeof TOGGLE_DIALOG
   payload: {
@@ -196,4 +207,7 @@ export type ToggleDialogAction = {
   }
 }
 
-export type UiActions = ToggleDialogAction | UpdateThemeKeyAction
+export type UiActions =
+  | ToggleDialogAction
+  | UpdateThemeKeyAction
+  | UpdateCartOpen

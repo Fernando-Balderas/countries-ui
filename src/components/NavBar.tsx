@@ -4,6 +4,7 @@ import { updateThemeKey } from 'redux/actions'
 import ThemeContext, { themes } from 'contexts/Theme'
 
 import { ThemeKey, ThemeColors } from 'types'
+import { updateCartOpen } from '../redux/actions'
 
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
@@ -19,6 +20,10 @@ import {
 function NavBar() {
   const dispatch = useDispatch()
   const theme = useContext(ThemeContext)
+
+  const handleSwitchTheme = (v: ThemeKey) => () => dispatch(updateThemeKey(v))
+  const handleShowCart = () => dispatch(updateCartOpen(true))
+
   return (
     <Navbar style={{ background: theme.background }}>
       <Container>
@@ -41,21 +46,18 @@ function NavBar() {
               }}
             >
               {Object.entries(ThemeColors).map(([k, v], i) => (
-                <NavDropdown.Item
-                  key={i}
-                  onClick={() => dispatch(updateThemeKey(v as ThemeKey))}
-                >
+                <NavDropdown.Item key={i} onClick={handleSwitchTheme(v)}>
                   <FaCircle style={{ color: themes[v].background }} />
                   {k}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
-            <Navbar.Text>
+            <Nav.Link onClick={handleShowCart}>
               <FaShoppingCart
                 size="1.6em"
                 style={{ color: theme.foreground }}
               />
-            </Navbar.Text>
+            </Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
