@@ -15,8 +15,8 @@ function SearchOptions() {
   )
   return (
     <Form>
-      <Row>
-        <Form.Group as={Col} lg={6} md={6}>
+      <Row style={{ display: 'flex', justifyContent: 'center' }}>
+        <Form.Group as={Col} lg={6} md={6} className="px-0">
           <Form.Label visuallyHidden>Query</Form.Label>
           <Form.Control
             id="search"
