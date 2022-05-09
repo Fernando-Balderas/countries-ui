@@ -36,7 +36,7 @@ function Cart({ inCart }: CartProps) {
   return (
     <Offcanvas show={cartOpen} placement="end" onHide={handleClose}>
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title>Cart</Offcanvas.Title>
+        <Offcanvas.Title as="h2">Cart</Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Stack gap={0} className="mx-auto">
