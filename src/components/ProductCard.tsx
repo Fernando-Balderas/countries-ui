@@ -10,32 +10,33 @@ type ProductCardProps = {
   product: Product
 }
 
-const makeLanguages = (languages: Languages) => {
-  return Object.values(languages).map((lang) => (
-    <Badge pill bg="secondary" key={lang}>
-      {lang}
-    </Badge>
-  ))
-}
-
-const makeComponentsFromArray = (arr: string[]) => {
-  return arr.map((elem) => (
-    <Badge pill bg="secondary" key={elem}>
-      {elem}
-    </Badge>
-  ))
-}
-
-const makeCurrencies = (currencies: Currencies) => {
-  return Object.values(currencies).map((cur) => (
-    <Badge pill bg="secondary" key={cur.name}>
-      {`${cur.symbol} - ${cur.name}`}
-    </Badge>
-  ))
-}
-
 function ProductCard({ product }: ProductCardProps) {
   // TODO: Fix missing country data when reload or go back
+
+  const makeLanguages = (languages: Languages) => {
+    return Object.values(languages).map((lang) => (
+      <Badge pill bg="secondary" key={lang}>
+        {lang}
+      </Badge>
+    ))
+  }
+
+  const makeComponentsFromArray = (arr: string[]) => {
+    return arr.map((elem) => (
+      <Badge pill bg="secondary" key={elem}>
+        {elem}
+      </Badge>
+    ))
+  }
+
+  const makeCurrencies = (currencies: Currencies) => {
+    return Object.values(currencies).map((cur) => (
+      <Badge pill bg="secondary" key={cur.name}>
+        {`${cur.symbol} - ${cur.name}`}
+      </Badge>
+    ))
+  }
+
   return (
     <Card>
       <Card.Img
