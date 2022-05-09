@@ -25,7 +25,7 @@ function NavBar() {
   const handleShowCart = () => dispatch(updateCartOpen(true))
 
   return (
-    <Navbar style={{ background: theme.background }}>
+    <Navbar sticky="top" style={{ background: theme.background }}>
       <Container>
         <Navbar.Brand href="/" style={{ color: theme.foreground }}>
           <FaGlobeEurope size="1.6em" /> Countries
