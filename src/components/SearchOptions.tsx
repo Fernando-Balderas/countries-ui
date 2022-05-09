@@ -10,7 +10,7 @@ import Form from 'react-bootstrap/Form'
 
 function SearchOptions() {
   const dispatch = useDispatch()
-  const { sortBy, sortAscDesc } = useSelector(
+  const { query, sortBy, sortAscDesc } = useSelector(
     (state: AppState) => state.product
   )
   return (
@@ -22,6 +22,7 @@ function SearchOptions() {
             id="search"
             type="text"
             placeholder="Search by name, region or subregion"
+            value={query}
             onChange={(e) => dispatch(updateQuery(e.target.value as Query))}
             style={{ borderRadius: '20px' }}
           />
