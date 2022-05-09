@@ -27,8 +27,8 @@ function NavBar() {
   return (
     <Navbar style={{ background: theme.background }}>
       <Container>
-        <Navbar.Brand href="/">
-          <FaGlobeEurope size="1.6em" style={{ color: theme.foreground }} />
+        <Navbar.Brand href="/" style={{ color: theme.foreground }}>
+          <FaGlobeEurope size="1.6em" /> Countries
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse
@@ -47,8 +47,7 @@ function NavBar() {
             >
               {Object.entries(ThemeColors).map(([k, v], i) => (
                 <NavDropdown.Item key={i} onClick={handleSwitchTheme(v)}>
-                  <FaCircle style={{ color: themes[v].background }} />
-                  {k}
+                  <FaCircle style={{ color: themes[v].background }} /> {k}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
