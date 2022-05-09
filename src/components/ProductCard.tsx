@@ -38,43 +38,42 @@ function ProductCard({ product }: ProductCardProps) {
   // TODO: Fix missing country data when reload or go back
   return (
     <Card>
-      <Card.Img variant="top" src={product.flags.png} />
-      <Card.Body>
+      <Card.Img
+        variant="top"
+        className="mx-auto my-1 img-thumbnail"
+        src={product.flags.png}
+        style={{ width: '70%' }}
+      />
+      <Card.Header>
         <Card.Title>{product.name.common}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           {product.name.official}
         </Card.Subtitle>
-      </Card.Body>
-      <ListGroup className="list-group-flush">
-        <ListGroupItem>
-          Language:
-          {product.languages && makeLanguages(product.languages)}
-        </ListGroupItem>
-        <ListGroupItem>
-          Region:
-          {`${product.region} (${product.subregion})`}
-        </ListGroupItem>
-        <ListGroupItem>
-          Population:
-          {product.population}
-        </ListGroupItem>
-        <ListGroupItem>
-          Area:
-          {product.area}
-        </ListGroupItem>
-        <ListGroupItem>
-          Capital:
-          {product.capital && makeComponentsFromArray(product.capital)}
-        </ListGroupItem>
-        <ListGroupItem>
-          Currency:
-          {product.currencies && makeCurrencies(product.currencies)}
-        </ListGroupItem>
-      </ListGroup>
+      </Card.Header>
       <Card.Body>
+        <ListGroup className="list-group-flush">
+          <ListGroupItem>
+            Language: {product.languages && makeLanguages(product.languages)}
+          </ListGroupItem>
+          <ListGroupItem>
+            Region: {product.region}
+            {product.subregion && ` (${product.subregion})`}
+          </ListGroupItem>
+          <ListGroupItem>Population: {product.population}</ListGroupItem>
+          <ListGroupItem>Area: {product.area}</ListGroupItem>
+          <ListGroupItem>
+            Capital:{' '}
+            {product.capital && makeComponentsFromArray(product.capital)}
+          </ListGroupItem>
+          <ListGroupItem>
+            Currency: {product.currencies && makeCurrencies(product.currencies)}
+          </ListGroupItem>
+        </ListGroup>
+      </Card.Body>
+      <Card.Footer className="text-center">
         <Card.Link href={product.maps.googleMaps}>Google Maps</Card.Link>
         <Card.Link href={product.maps.openStreetMaps}>OpenStreetMaps</Card.Link>
-      </Card.Body>
+      </Card.Footer>
     </Card>
   )
 }
