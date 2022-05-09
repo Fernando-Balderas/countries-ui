@@ -12,6 +12,7 @@ var humanFormat = require('human-format')
 
 type CustomTableProps = {
   products: Products
+  currentIndex: number
 }
 
 const titles = [
@@ -25,7 +26,7 @@ const titles = [
   'Actions',
 ]
 
-function CustomTable({ products }: CustomTableProps) {
+function CustomTable({ products, currentIndex }: CustomTableProps) {
   const dispatch = useDispatch()
 
   const makeSomeComponents = (arr: string[]) => {
@@ -45,7 +46,7 @@ function CustomTable({ products }: CustomTableProps) {
       <tbody>
         {products.map((c, i) => (
           <tr key={c.cca3}>
-            <td>{i + 1}</td>
+            <td>{currentIndex + i + 1}</td>
             <td>{c.flag}</td>
             <td>
               <Link to={`/products/${c.cca3}`}>{`${c.name.common}`}</Link>

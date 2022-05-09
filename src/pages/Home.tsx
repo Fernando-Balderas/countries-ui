@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import { AppState } from '../types'
@@ -12,6 +12,13 @@ import NavBar from 'components/NavBar'
 import CustomTable from 'components/CustomTable'
 import Cart from 'components/Cart'
 import SearchOptions from 'components/SearchOptions'
+import CustomPagination from 'components/CustomPagination'
+
+type PaginateArgs = {
+  pageNumber: number
+}
+
+export type FnPaginate = ({ pageNumber }: PaginateArgs) => void
 
 export default function Home() {
   const dispatch = useDispatch()
@@ -33,6 +40,15 @@ export default function Home() {
     dispatch(sortProducts())
   }, [dispatch, sortBy, sortAscDesc])
 
+  const [currentPage, setCurrentPage] = useState(1)
+  const [productsPerPage] = useState(10)
+
+  const indexOfLastProduct = currentPage * productsPerPage
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage
+  const paginated = filtered.slice(indexOfFirstProduct, indexOfLastProduct)
+
+  const paginate: FnPaginate = ({ pageNumber }) => setCurrentPage(pageNumber)
+
   return (
     <>
       <NavBar />
@@ -45,7 +61,16 @@ export default function Home() {
         </Row>
         <Row>
           <Col lg={10} className="mx-auto">
-            <CustomTable products={filtered} />
+            <CustomTable
+              products={paginated}
+              currentIndex={indexOfFirstProduct}
+            />
+            <CustomPagination
+              totalProducts={filtered.length}
+              productsPerPage={productsPerPage}
+              currentPage={currentPage}
+              paginate={paginate}
+            />
           </Col>
         </Row>
       </Container>

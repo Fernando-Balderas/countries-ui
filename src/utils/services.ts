@@ -53,3 +53,7 @@ export function pickSome(arr: string[], limit: number) {
   if (len <= limit) return arr
   else return [...arr.slice(0, limit - 1), `${len - limit + 1} more`]
 }
+
+export function range(size: number, startAt = 0) {
+  return [...Array(size).keys()].map((i) => i + startAt)
+}
