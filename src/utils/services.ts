@@ -51,5 +51,5 @@ export function filterCountriesByQuery(arr: Products, query: Query) {
 export function pickSome(arr: string[], limit: number) {
   const len = arr.length
   if (len <= limit) return arr
-  else return [...arr.slice(0, limit), `${len - limit} more`]
+  else return [...arr.slice(0, limit - 1), `${len - limit + 1} more`]
 }

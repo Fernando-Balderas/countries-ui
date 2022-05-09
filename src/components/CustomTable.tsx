@@ -29,7 +29,7 @@ function CustomTable({ products }: CustomTableProps) {
   const dispatch = useDispatch()
 
   const makeSomeComponents = (arr: string[]) => {
-    const newArr = pickSome(arr, 1)
+    const newArr = pickSome(arr, 2)
     return newArr.map((l) => <li key={l}>{l}</li>)
   }
 
