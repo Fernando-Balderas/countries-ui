@@ -20,13 +20,14 @@ function CustomPagination({
   const P = Math.ceil(totalProducts / productsPerPage)
   let pages = range(P, 1)
 
+  const handlePrev = () => paginate({ pageNumber: currentPage - 1 })
+  const handleNext = () => paginate({ pageNumber: currentPage + 1 })
+
   return (
     <Pagination
       style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
     >
-      <Pagination.Prev
-        onClick={() => paginate({ pageNumber: currentPage - 1 })}
-      />
+      <Pagination.Prev onClick={handlePrev} />
       {pages.map((p) => (
         <Pagination.Item
           key={p}
@@ -36,9 +37,7 @@ function CustomPagination({
           {p}
         </Pagination.Item>
       ))}
-      <Pagination.Next
-        onClick={() => paginate({ pageNumber: currentPage + 1 })}
-      />
+      <Pagination.Next onClick={handleNext} />
     </Pagination>
   )
 }

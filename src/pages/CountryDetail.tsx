@@ -5,19 +5,19 @@ import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import NavBar from 'components/NavBar'
-import ProductCard from 'components/ProductCard'
+import CountryCard from 'components/CountryCard'
 
 import { AppState } from '../types'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()
 
-  const product = useSelector((state: AppState) =>
-    state.product.countries.find((p) => p.cca3 === id)
+  const country = useSelector((state: AppState) =>
+    state.country.countries.find((p) => p.cca3 === id)
   )
 
-  if (!product) {
-    return <div>Product not found</div>
+  if (!country) {
+    return <div>Country not found</div>
   }
 
   return (
@@ -26,7 +26,7 @@ export default function Product() {
       <Container>
         <Row className="justify-content-md-center">
           <Col xs lg="6">
-            <ProductCard product={product} />
+            <CountryCard country={country} />
           </Col>
         </Row>
       </Container>

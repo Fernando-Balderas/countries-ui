@@ -5,13 +5,13 @@ import { useDispatch } from 'react-redux'
 import Button from 'react-bootstrap/Button'
 import { pickSome } from 'utils/services'
 
-import { Products } from 'types'
-import { addProduct } from 'redux/actions'
+import { Countries } from 'types'
+import { addCountry } from 'redux/actions'
 
-var humanFormat = require('human-format')
+const humanFormat = require('human-format')
 
 type CustomTableProps = {
-  products: Products
+  countries: Countries
   currentIndex: number
 }
 
@@ -26,7 +26,7 @@ const titles = [
   'Actions',
 ]
 
-function CustomTable({ products, currentIndex }: CustomTableProps) {
+function CustomTable({ countries, currentIndex }: CustomTableProps) {
   const dispatch = useDispatch()
 
   const makeSomeComponents = (arr: string[]) => {
@@ -44,23 +44,26 @@ function CustomTable({ products, currentIndex }: CustomTableProps) {
         </tr>
       </thead>
       <tbody>
-        {products.map((c, i) => (
-          <tr key={c.cca3}>
+        {countries.map((country, i) => (
+          <tr key={country.cca3}>
             <td>{currentIndex + i + 1}</td>
-            <td>{c.flag}</td>
+            <td>{country.flag}</td>
             <td>
-              <Link to={`/products/${c.cca3}`}>{`${c.name.common}`}</Link>
+              <Link
+                to={`/countries/${country.cca3}`}
+              >{`${country.name.common}`}</Link>
             </td>
             <td>
               <ul>
-                {c.languages && makeSomeComponents(Object.values(c.languages))}
+                {country.languages &&
+                  makeSomeComponents(Object.values(country.languages))}
               </ul>
             </td>
-            <td>{humanFormat(c.population)}</td>
-            <td>{`${c.area} `}&#13218;</td>
-            <td>{c.region}</td>
+            <td>{humanFormat(country.population)}</td>
+            <td>{`${country.area} `}&#13218;</td>
+            <td>{country.region}</td>
             <td>
-              <Button onClick={() => dispatch(addProduct(c))}>Add</Button>
+              <Button onClick={() => dispatch(addCountry(country))}>Add</Button>
             </td>
           </tr>
         ))}

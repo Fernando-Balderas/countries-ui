@@ -10,26 +10,30 @@ import SearchOptions from 'components/SearchOptions'
 import CustomPagination from 'components/CustomPagination'
 
 import { AppState, FnPaginate } from '../types'
-import { fetchProducts, sortProducts, filterProducts } from '../redux/actions'
+import {
+  fetchCountries,
+  sortCountries,
+  filterCountries,
+} from '../redux/actions'
 
 export default function Home() {
   const dispatch = useDispatch()
   const { filtered, inCart, query, sortBy, sortAscDesc } = useSelector(
-    (state: AppState) => state.product
+    (state: AppState) => state.country
   )
 
   useEffect(() => {
-    dispatch(fetchProducts())
+    dispatch(fetchCountries())
   }, [dispatch])
 
   useEffect(() => {
-    dispatch(filterProducts())
-    dispatch(sortProducts())
+    dispatch(filterCountries())
+    dispatch(sortCountries())
   }, [dispatch, query])
 
   useEffect(() => {
     // TODO: Possible improvement using selectors
-    dispatch(sortProducts())
+    dispatch(sortCountries())
   }, [dispatch, sortBy, sortAscDesc])
 
   const [currentPage, setCurrentPage] = useState(1)
@@ -54,7 +58,7 @@ export default function Home() {
         <Row>
           <Col lg={10} className="mx-auto">
             <CustomTable
-              products={paginated}
+              countries={paginated}
               currentIndex={indexOfFirstProduct}
             />
             <CustomPagination

@@ -6,10 +6,10 @@ import { AppState } from '../types'
 import createRootReducer from './reducers'
 import rootSaga from './sagas'
 
-import { defaultProductState, defaultUiState } from './reducers'
+import { defaultCountryState, defaultUiState } from './reducers'
 
 const initState: AppState = {
-  product: defaultProductState,
+  country: defaultCountryState,
   ui: defaultUiState,
 }
 

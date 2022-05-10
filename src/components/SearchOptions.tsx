@@ -10,7 +10,7 @@ import { updateQuery, updateSortAscDesc, updateSortBy } from 'redux/actions'
 function SearchOptions() {
   const dispatch = useDispatch()
   const { query, sortBy, sortAscDesc } = useSelector(
-    (state: AppState) => state.product
+    (state: AppState) => state.country
   )
   return (
     <Form>

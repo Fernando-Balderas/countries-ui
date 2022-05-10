@@ -1,4 +1,4 @@
-import { CountryName, Products, Query, SortAscDesc, SortBy } from 'types'
+import { CountryName, Countries, Query, SortAscDesc, SortBy } from 'types'
 
 type Value = string | number
 
@@ -11,7 +11,7 @@ function compareFn(a: Value, b: Value, ascDesc: string) {
 }
 
 export function sortCountriesByCriteria(
-  arr: Products,
+  arr: Countries,
   sortBy: SortBy,
   sortAscDesc: SortAscDesc
 ) {
@@ -33,7 +33,7 @@ function includesQuery(v: string, query: Query) {
   return v.toLowerCase().includes(query.toLowerCase())
 }
 
-export function filterCountriesByQuery(arr: Products, query: Query) {
+export function filterCountriesByQuery(arr: Countries, query: Query) {
   return [...arr].filter((el) => {
     const found = Object.entries(el).filter(([k, v]) => {
       if (k === 'name') {

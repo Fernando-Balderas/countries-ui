@@ -1,18 +1,18 @@
 // Action types
-export const ADD_PRODUCT = 'ADD_PRODUCT'
-export const REMOVE_PRODUCT = 'REMOVE_PRODUCT'
-export const ADD_PRODUCTS = 'ADD_PRODUCTS'
-export const SORT_PRODUCTS = 'SORT_PRODUCTS'
+export const ADD_COUNTRY = 'ADD_COUNTRY'
+export const REMOVE_COUNTRY = 'REMOVE_COUNTRY'
+export const ADD_COUNTRIES = 'ADD_COUNTRIES'
+export const SORT_COUNTRIES = 'SORT_COUNTRIES'
 export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
 export const UPDATE_SORT_ASC_DESC = 'UPDATE_SORT_ASC_DESC'
 export const UPDATE_QUERY = 'UPDATE_QUERY'
-export const FILTER_PRODUCTS = 'FILTER_PRODUCTS'
+export const FILTER_COUNTRIES = 'FILTER_COUNTRIES'
 
 export const UPDATE_THEME_KEY = 'UPDATE_THEME_KEY'
 export const UPDATE_CART_OPEN = 'UPDATE_CART_OPEN'
 export const TOGGLE_DIALOG = 'TOGGLE_DIALOG'
 
-export type CountryName = { common: string; official: string; nativeName: {} }
+export type CountryName = { common: string; official: string }
 
 export type Languages = {
   [key: string]: string
@@ -27,7 +27,7 @@ export type Currencies = {
   [key: string]: Currency
 }
 
-export type Product = {
+export type Country = {
   cca3: string
   population: number
   name: CountryName
@@ -47,27 +47,13 @@ export type Product = {
   subregion: string
   postalCode: { format: string; regex: string }
   timezones: string[]
-  // altSpellings: string[]
-  // car: {}
-  // cca2: string
-  // ccn3: string
-  // cioc: string
-  // demonyms: {}
-  // fifa: string
-  // gini: {}
-  // idd: {}
-  // independent: boolean
-  // landlocked: boolean
-  // startOfWeek: string
-  // status: string
-  // tld: string[]
-  // translations: {}
-  // unMember: boolean
+  independent: boolean
+  unMember: boolean
 }
 
-export type Products = Product[]
+export type Countries = Country[]
 
-export type SortBy = keyof Product
+export type SortBy = keyof Country
 
 export type SortAscDesc = 'ASC' | 'DESC'
 
@@ -102,13 +88,13 @@ export enum DialogType {
   SignUp = 'signUp',
 }
 
-export type ProductState = {
-  countries: Products
-  inCart: Products
+export type CountryState = {
+  countries: Countries
+  inCart: Countries
   sortBy: SortBy
   sortAscDesc: SortAscDesc
   query: Query
-  filtered: Products
+  filtered: Countries
 }
 
 // Using dynamic keys from an enum
@@ -121,33 +107,33 @@ export type UiState = {
 }
 
 export type AppState = {
-  product: ProductState
+  country: CountryState
   ui: UiState
 }
 
-export type AddProductAction = {
-  type: typeof ADD_PRODUCT
+export type AddCountryAction = {
+  type: typeof ADD_COUNTRY
   payload: {
-    product: Product
+    country: Country
   }
 }
 
-export type RemoveProductAction = {
-  type: typeof REMOVE_PRODUCT
+export type RemoveCountryAction = {
+  type: typeof REMOVE_COUNTRY
   payload: {
-    product: Product
+    country: Country
   }
 }
 
-export type AddProductsAction = {
-  type: typeof ADD_PRODUCTS
+export type AddCountriesAction = {
+  type: typeof ADD_COUNTRIES
   payload: {
-    products: Products
+    countries: Countries
   }
 }
 
-export type SortProductsAction = {
-  type: typeof SORT_PRODUCTS
+export type SortCountriessAction = {
+  type: typeof SORT_COUNTRIES
 }
 
 export type UpdateSortBy = {
@@ -171,20 +157,20 @@ export type UpdateQuery = {
   }
 }
 
-export type FilterProducts = {
-  type: typeof FILTER_PRODUCTS
+export type FilterCountries = {
+  type: typeof FILTER_COUNTRIES
 }
 
 // Use this union in reducer
-export type ProductActions =
-  | AddProductAction
-  | RemoveProductAction
-  | AddProductsAction
-  | SortProductsAction
+export type CountryActions =
+  | AddCountryAction
+  | RemoveCountryAction
+  | AddCountriesAction
+  | SortCountriessAction
   | UpdateSortBy
   | UpdateSortAscDesc
   | UpdateQuery
-  | FilterProducts
+  | FilterCountries
 
 export type UpdateThemeKeyAction = {
   type: typeof UPDATE_THEME_KEY

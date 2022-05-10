@@ -4,13 +4,13 @@ import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Badge from 'react-bootstrap/Badge'
 
-import { Currencies, Languages, Product } from 'types'
+import { Currencies, Languages, Country } from 'types'
 
-type ProductCardProps = {
-  product: Product
+type CountryCardProps = {
+  country: Country
 }
 
-function ProductCard({ product }: ProductCardProps) {
+function CountryCard({ country }: CountryCardProps) {
   // TODO: Fix missing country data when reload or go back
 
   const makeLanguages = (languages: Languages) => {
@@ -42,41 +42,41 @@ function ProductCard({ product }: ProductCardProps) {
       <Card.Img
         variant="top"
         className="mx-auto my-1 img-thumbnail"
-        src={product.flags.png}
+        src={country.flags.png}
         style={{ width: '70%' }}
       />
       <Card.Header>
-        <Card.Title>{product.name.common}</Card.Title>
+        <Card.Title>{country.name.common}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
-          {product.name.official}
+          {country.name.official}
         </Card.Subtitle>
       </Card.Header>
       <Card.Body>
         <ListGroup className="list-group-flush">
           <ListGroupItem>
-            Language: {product.languages && makeLanguages(product.languages)}
+            Language: {country.languages && makeLanguages(country.languages)}
           </ListGroupItem>
           <ListGroupItem>
-            Region: {product.region}
-            {product.subregion && ` (${product.subregion})`}
+            Region: {country.region}
+            {country.subregion && ` (${country.subregion})`}
           </ListGroupItem>
-          <ListGroupItem>Population: {product.population}</ListGroupItem>
-          <ListGroupItem>Area: {product.area}</ListGroupItem>
+          <ListGroupItem>Population: {country.population}</ListGroupItem>
+          <ListGroupItem>Area: {country.area}</ListGroupItem>
           <ListGroupItem>
             Capital:{' '}
-            {product.capital && makeComponentsFromArray(product.capital)}
+            {country.capital && makeComponentsFromArray(country.capital)}
           </ListGroupItem>
           <ListGroupItem>
-            Currency: {product.currencies && makeCurrencies(product.currencies)}
+            Currency: {country.currencies && makeCurrencies(country.currencies)}
           </ListGroupItem>
         </ListGroup>
       </Card.Body>
       <Card.Footer className="text-center">
-        <Card.Link href={product.maps.googleMaps}>Google Maps</Card.Link>
-        <Card.Link href={product.maps.openStreetMaps}>OpenStreetMaps</Card.Link>
+        <Card.Link href={country.maps.googleMaps}>Google Maps</Card.Link>
+        <Card.Link href={country.maps.openStreetMaps}>OpenStreetMaps</Card.Link>
       </Card.Footer>
     </Card>
   )
 }
 
-export default ProductCard
+export default CountryCard

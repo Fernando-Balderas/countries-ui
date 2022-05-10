@@ -1,11 +1,8 @@
 import { all } from 'redux-saga/effects'
 
-import productSagas from './product'
+import countrySagas from './country'
 import uiSagas from './ui'
 
 export default function* rootSaga() {
-  yield all([
-    ...productSagas,
-    ...uiSagas,
-  ])
+  yield all([...countrySagas, ...uiSagas])
 }

@@ -5,11 +5,11 @@ import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 
-import { AppState, Product, Products } from 'types'
-import { removeProduct, updateCartOpen } from '../redux/actions'
+import { AppState, Country, Countries } from 'types'
+import { removeCountry, updateCartOpen } from '../redux/actions'
 
 type CartProps = {
-  inCart: Products
+  inCart: Countries
 }
 
 function Cart({ inCart }: CartProps) {
@@ -18,14 +18,14 @@ function Cart({ inCart }: CartProps) {
 
   const handleClose = () => dispatch(updateCartOpen(false))
 
-  const makeCard = (product: Product) => (
-    <Alert key={`incart-${product.cca3}`} variant="light" className="p-0">
-      {`${product.flag} ${product.name.common}`}
+  const makeCard = (country: Country) => (
+    <Alert key={`incart-${country.cca3}`} variant="light" className="p-0">
+      {`${country.flag} ${country.name.common}`}
       <Button
         variant="outline-danger"
         className="mx-1"
         style={{ float: 'right' }}
-        onClick={() => dispatch(removeProduct(product))}
+        onClick={() => dispatch(removeCountry(country))}
       >
         Remove
       </Button>
@@ -39,8 +39,8 @@ function Cart({ inCart }: CartProps) {
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Stack gap={0} className="mx-auto">
-          {inCart.length <= 0 && <div>No products in cart</div>}
-          {inCart.map((p) => makeCard(p))}
+          {inCart.length <= 0 && <div>No countries in cart</div>}
+          {inCart.map((country) => makeCard(country))}
         </Stack>
       </Offcanvas.Body>
     </Offcanvas>
