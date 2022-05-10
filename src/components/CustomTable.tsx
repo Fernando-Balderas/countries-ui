@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
-import Button from 'react-bootstrap/Button'
 import { pickSome } from 'utils/services'
+import ThemeContext from 'contexts/Theme'
 
 import { Countries } from 'types'
 import { addCountry } from 'redux/actions'
@@ -28,6 +28,7 @@ const titles = [
 
 function CustomTable({ countries, currentIndex }: CustomTableProps) {
   const dispatch = useDispatch()
+  const theme = useContext(ThemeContext)
 
   const makeSomeComponents = (arr: string[]) => {
     const newArr = pickSome(arr, 2)
@@ -63,7 +64,12 @@ function CustomTable({ countries, currentIndex }: CustomTableProps) {
             <td>{`${country.area} `}&#13218;</td>
             <td>{country.region}</td>
             <td>
-              <Button onClick={() => dispatch(addCountry(country))}>Add</Button>
+              <button
+                className={`button btn-theme-${theme.name}`}
+                onClick={() => dispatch(addCountry(country))}
+              >
+                Add
+              </button>
             </td>
           </tr>
         ))}

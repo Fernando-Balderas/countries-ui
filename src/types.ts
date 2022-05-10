@@ -71,6 +71,7 @@ export enum ThemeColors {
 }
 
 export type Theme = {
+  name: string
   foreground: string
   background: string
 }

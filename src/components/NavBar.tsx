@@ -22,7 +22,7 @@ function NavBar() {
 
   const handleSwitchTheme = (v: ThemeKey) => () => dispatch(updateThemeKey(v))
   const handleShowCart = () => dispatch(updateCartOpen(true))
-
+  // TODO: Use classes to switch styles
   return (
     <Navbar sticky="top" style={{ background: theme.background }}>
       <Container>
