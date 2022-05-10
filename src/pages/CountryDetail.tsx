@@ -6,6 +6,7 @@ import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import NavBar from 'components/NavBar'
 import CountryCard from 'components/CountryCard'
+import Footer from 'components/Footer'
 
 import { AppState } from '../types'
 
@@ -30,6 +31,7 @@ export default function Product() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   )
 }

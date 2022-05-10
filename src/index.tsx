@@ -8,6 +8,7 @@ import * as serviceWorker from './serviceWorker'
 import makeStore from './redux/store'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import './assets/sass/index.scss'
 
 const store = makeStore()
 

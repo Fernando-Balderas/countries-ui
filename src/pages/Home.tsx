@@ -8,6 +8,7 @@ import CustomTable from 'components/CustomTable'
 import Cart from 'components/Cart'
 import SearchOptions from 'components/SearchOptions'
 import CustomPagination from 'components/CustomPagination'
+import Footer from 'components/Footer'
 
 import { AppState, FnPaginate } from '../types'
 import {
@@ -70,6 +71,7 @@ export default function Home() {
           </Col>
         </Row>
       </Container>
+      <Footer />
     </>
   )
 }
