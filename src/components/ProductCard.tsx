@@ -1,10 +1,10 @@
 import React from 'react'
-import { Currencies, Languages, Product } from 'types'
-
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Badge from 'react-bootstrap/Badge'
+
+import { Currencies, Languages, Product } from 'types'
 
 type ProductCardProps = {
   product: Product

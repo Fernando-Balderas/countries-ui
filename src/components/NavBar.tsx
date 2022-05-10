@@ -1,11 +1,6 @@
 import React, { useContext } from 'react'
 import { useDispatch } from 'react-redux'
 import { updateThemeKey } from 'redux/actions'
-import ThemeContext, { themes } from 'contexts/Theme'
-
-import { ThemeKey, ThemeColors } from 'types'
-import { updateCartOpen } from '../redux/actions'
-
 import Navbar from 'react-bootstrap/Navbar'
 import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
@@ -16,6 +11,10 @@ import {
   FaPalette,
   FaCircle,
 } from 'react-icons/fa'
+import ThemeContext, { themes } from 'contexts/Theme'
+
+import { ThemeKey, ThemeColors } from 'types'
+import { updateCartOpen } from '../redux/actions'
 
 function NavBar() {
   const dispatch = useDispatch()

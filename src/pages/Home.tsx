@@ -1,24 +1,16 @@
 import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { AppState } from '../types'
-import { fetchProducts, sortProducts, filterProducts } from '../redux/actions'
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
-
 import NavBar from 'components/NavBar'
 import CustomTable from 'components/CustomTable'
 import Cart from 'components/Cart'
 import SearchOptions from 'components/SearchOptions'
 import CustomPagination from 'components/CustomPagination'
 
-type PaginateArgs = {
-  pageNumber: number
-}
-
-export type FnPaginate = ({ pageNumber }: PaginateArgs) => void
+import { AppState, FnPaginate } from '../types'
+import { fetchProducts, sortProducts, filterProducts } from '../redux/actions'
 
 export default function Home() {
   const dispatch = useDispatch()

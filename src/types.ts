@@ -211,3 +211,9 @@ export type UiActions =
   | ToggleDialogAction
   | UpdateThemeKeyAction
   | UpdateCartOpen
+
+type PaginateArgs = {
+  pageNumber: number
+}
+
+export type FnPaginate = ({ pageNumber }: PaginateArgs) => void

@@ -1,8 +1,8 @@
 import React from 'react'
 import Pagination from 'react-bootstrap/Pagination'
-
-import { FnPaginate } from 'pages/Home'
 import { range } from 'utils/services'
+
+import { FnPaginate } from '../types'
 
 type CustomPaginationProps = {
   totalProducts: number

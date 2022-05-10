@@ -1,14 +1,13 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-
-import { AppState } from '../types'
-
 import Container from 'react-bootstrap/Container'
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import NavBar from 'components/NavBar'
 import ProductCard from 'components/ProductCard'
+
+import { AppState } from '../types'
 
 export default function Product() {
   const { id } = useParams<{ id: string }>()

@@ -1,12 +1,11 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { AppState, Query, SortAscDesc, SortBy } from 'types'
-import { updateQuery, updateSortAscDesc, updateSortBy } from 'redux/actions'
-
 import Row from 'react-bootstrap/Row'
 import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
+
+import { AppState, Query, SortAscDesc, SortBy } from 'types'
+import { updateQuery, updateSortAscDesc, updateSortBy } from 'redux/actions'
 
 function SearchOptions() {
   const dispatch = useDispatch()

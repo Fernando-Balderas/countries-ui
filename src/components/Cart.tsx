@@ -1,13 +1,12 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-
-import { AppState, Product, Products } from 'types'
-import { removeProduct, updateCartOpen } from '../redux/actions'
-
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
+
+import { AppState, Product, Products } from 'types'
+import { removeProduct, updateCartOpen } from '../redux/actions'
 
 type CartProps = {
   inCart: Products

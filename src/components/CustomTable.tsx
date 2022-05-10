@@ -2,12 +2,12 @@ import React from 'react'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+import Button from 'react-bootstrap/Button'
+import { pickSome } from 'utils/services'
 
 import { Products } from 'types'
 import { addProduct } from 'redux/actions'
 
-import Button from 'react-bootstrap/Button'
-import { pickSome } from 'utils/services'
 var humanFormat = require('human-format')
 
 type CustomTableProps = {
