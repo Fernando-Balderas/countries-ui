@@ -19,7 +19,7 @@ import {
 
 export default function Home() {
   const dispatch = useDispatch()
-  const { filtered, inCart, query, sortBy, sortAscDesc } = useSelector(
+  const { filtered, query, sortBy, sortAscDesc } = useSelector(
     (state: AppState) => state.country
   )
 
@@ -49,7 +49,7 @@ export default function Home() {
   return (
     <>
       <NavBar />
-      <Cart inCart={inCart} />
+      <Cart />
       <Container fluid>
         <Row>
           <Col lg={10} className="mx-auto my-3">

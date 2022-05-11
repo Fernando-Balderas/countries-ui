@@ -11,8 +11,6 @@ type CountryCardProps = {
 }
 
 function CountryCard({ country }: CountryCardProps) {
-  // TODO: Fix missing country data when reload or go back
-
   const makeLanguages = (languages: Languages) => {
     return Object.values(languages).map((lang) => (
       <Badge pill bg="secondary" key={lang}>

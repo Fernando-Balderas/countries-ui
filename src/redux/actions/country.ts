@@ -91,7 +91,6 @@ export function fetchCountries() {
     return fetch(`${API_URL}/v3.1/all`)
       .then((resp) => resp.json())
       .then((countries) => {
-        console.log(countries)
         dispatch(addCountries(countries))
       })
       .then(() => dispatch(filterCountries()))

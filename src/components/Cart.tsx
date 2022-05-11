@@ -5,15 +5,12 @@ import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
 import Button from 'react-bootstrap/Button'
 
-import { AppState, Country, Countries } from 'types'
+import { AppState, Country } from 'types'
 import { removeCountry, updateCartOpen } from '../redux/actions'
 
-type CartProps = {
-  inCart: Countries
-}
-
-function Cart({ inCart }: CartProps) {
+function Cart() {
   const dispatch = useDispatch()
+  const { inCart } = useSelector((state: AppState) => state.country)
   const { cartOpen } = useSelector((state: AppState) => state.ui)
 
   const handleClose = () => dispatch(updateCartOpen(false))
