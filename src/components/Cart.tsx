@@ -21,6 +21,7 @@ function Cart() {
       <Button
         variant="outline-danger"
         className="mx-1"
+        aria-label="Remove country"
         style={{ float: 'right' }}
         onClick={() => dispatch(removeCountry(country))}
       >
@@ -30,9 +31,16 @@ function Cart() {
   )
 
   return (
-    <Offcanvas show={cartOpen} placement="end" onHide={handleClose}>
+    <Offcanvas
+      show={cartOpen}
+      placement="end"
+      onHide={handleClose}
+      aria-labelledby="cart-title"
+    >
       <Offcanvas.Header closeButton>
-        <Offcanvas.Title as="h2">Cart</Offcanvas.Title>
+        <Offcanvas.Title as="h2" id="cart-title">
+          Cart
+        </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Stack gap={0} className="mx-auto">

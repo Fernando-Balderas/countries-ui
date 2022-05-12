@@ -13,7 +13,7 @@ function SearchOptions() {
     (state: AppState) => state.country
   )
   return (
-    <Form>
+    <Form aria-label="Search and filter options">
       <Row style={{ display: 'flex', justifyContent: 'center' }}>
         <Form.Group as={Col} lg={6} md={6} className="px-0">
           <Form.Label visuallyHidden>Query</Form.Label>
@@ -24,6 +24,7 @@ function SearchOptions() {
             value={query}
             onChange={(e) => dispatch(updateQuery(e.target.value as Query))}
             style={{ borderRadius: '20px' }}
+            aria-label="Search text"
           />
         </Form.Group>
         <Form.Group as={Col} lg={2} md={2} sm={6} className="px-0">

@@ -51,6 +51,7 @@ function CustomTable({ countries, currentIndex }: CustomTableProps) {
             <td>{country.flag}</td>
             <td>
               <Link
+                aria-label="Country details"
                 to={`/countries/${country.cca3}`}
               >{`${country.name.common}`}</Link>
             </td>
@@ -66,6 +67,7 @@ function CustomTable({ countries, currentIndex }: CustomTableProps) {
             <td>
               <button
                 className={`button btn-theme-${theme.name}`}
+                aria-label="Add country"
                 onClick={() => dispatch(addCountry(country))}
               >
                 Add

@@ -47,7 +47,7 @@ export default function Product() {
     <>
       <NavBar />
       <Cart />
-      <Container>
+      <Container aria-label="Country details page">
         <Row className="justify-content-md-center">
           <Col xs lg="6">
             <CountryCard country={countryOrItem} />

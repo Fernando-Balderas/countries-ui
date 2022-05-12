@@ -25,19 +25,21 @@ function CustomPagination({
 
   return (
     <Pagination
+      aria-label="Pagination"
       style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
     >
-      <Pagination.Prev onClick={handlePrev} />
+      <Pagination.Prev aria-label="Previous page" onClick={handlePrev} />
       {pages.map((p) => (
         <Pagination.Item
           key={p}
           active={p === currentPage}
+          aria-label={`Page ${p}`}
           onClick={() => paginate({ pageNumber: p })}
         >
           {p}
         </Pagination.Item>
       ))}
-      <Pagination.Next onClick={handleNext} />
+      <Pagination.Next aria-label="Next page" onClick={handleNext} />
     </Pagination>
   )
 }

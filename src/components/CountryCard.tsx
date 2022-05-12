@@ -36,15 +36,16 @@ function CountryCard({ country }: CountryCardProps) {
   }
 
   return (
-    <Card>
+    <Card aria-labelledby="card-title">
       <Card.Img
         variant="top"
         className="mx-auto my-1 img-thumbnail"
         src={country.flags.png}
+        alt="Flag image"
         style={{ width: '70%' }}
       />
       <Card.Header>
-        <Card.Title>{country.name.common}</Card.Title>
+        <Card.Title id="card-title">{country.name.common}</Card.Title>
         <Card.Subtitle className="mb-2 text-muted">
           {country.name.official}
         </Card.Subtitle>
@@ -70,8 +71,15 @@ function CountryCard({ country }: CountryCardProps) {
         </ListGroup>
       </Card.Body>
       <Card.Footer className="text-center">
-        <Card.Link href={country.maps.googleMaps}>Google Maps</Card.Link>
-        <Card.Link href={country.maps.openStreetMaps}>OpenStreetMaps</Card.Link>
+        <Card.Link aria-label="Google maps" href={country.maps.googleMaps}>
+          Google Maps
+        </Card.Link>
+        <Card.Link
+          aria-label="Openstreet maps"
+          href={country.maps.openStreetMaps}
+        >
+          OpenStreetMaps
+        </Card.Link>
       </Card.Footer>
     </Card>
   )

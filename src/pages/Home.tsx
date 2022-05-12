@@ -44,13 +44,15 @@ export default function Home() {
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage
   const paginated = filtered.slice(indexOfFirstProduct, indexOfLastProduct)
 
+  // TODO: Fix duplicated countries in table and cart when go back to home page
+
   const paginate: FnPaginate = ({ pageNumber }) => setCurrentPage(pageNumber)
 
   return (
     <>
       <NavBar />
       <Cart />
-      <Container fluid>
+      <Container fluid aria-label="Home page">
         <Row>
           <Col lg={10} className="mx-auto my-3">
             <SearchOptions />

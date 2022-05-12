@@ -26,9 +26,17 @@ function NavBar() {
   const handleShowCart = () => dispatch(updateCartOpen(true))
   // TODO: Use classes to switch styles
   return (
-    <Navbar sticky="top" style={{ background: theme.background }}>
+    <Navbar
+      sticky="top"
+      style={{ background: theme.background }}
+      aria-label="Main menu"
+    >
       <Container>
-        <Navbar.Brand href="/" style={{ color: theme.foreground }}>
+        <Navbar.Brand
+          href="/"
+          aria-label="Home page"
+          style={{ color: theme.foreground }}
+        >
           <FaGlobeEurope size="1.6em" /> Countries
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -41,18 +49,22 @@ function NavBar() {
               title={
                 <FaPalette size="1.6em" style={{ color: theme.foreground }} />
               }
-              id="collasible-nav-dropdown"
+              aria-label="Themes"
               style={{
                 color: theme.foreground,
               }}
             >
               {Object.entries(ThemeColors).map(([k, v], i) => (
-                <NavDropdown.Item key={i} onClick={handleSwitchTheme(v)}>
+                <NavDropdown.Item
+                  key={i}
+                  aria-label={`Theme ${v}`}
+                  onClick={handleSwitchTheme(v)}
+                >
                   <FaCircle style={{ color: themes[v].background }} /> {k}
                 </NavDropdown.Item>
               ))}
             </NavDropdown>
-            <Nav.Link onClick={handleShowCart}>
+            <Nav.Link aria-label="Cart" onClick={handleShowCart}>
               <FaShoppingCart
                 size="1.6em"
                 style={{ color: theme.foreground }}
