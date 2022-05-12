@@ -9,6 +9,7 @@ import {
   UPDATE_SORT_ASC_DESC,
   FILTER_COUNTRIES,
   UPDATE_QUERY,
+  UPDATE_SORT,
 } from '../../types'
 
 import {
@@ -21,6 +22,10 @@ export const defaultCountryState: CountryState = {
   inCart: [],
   sortBy: 'name',
   sortAscDesc: 'ASC',
+  sort: {
+    by: 'name',
+    ascDesc: 'ASC',
+  },
   query: '',
   filtered: [],
 }
@@ -72,8 +77,8 @@ export default function country(
     case SORT_COUNTRIES: {
       const sorted = sortCountriesByCriteria(
         state.filtered,
-        state.sortBy,
-        state.sortAscDesc
+        state.sort.by,
+        state.sort.ascDesc
       )
       return { ...state, filtered: sorted }
     }
@@ -88,6 +93,11 @@ export default function country(
       const { sortAscDesc } = action.payload
       if (state.sortAscDesc === sortAscDesc) return state
       return { ...state, sortAscDesc: sortAscDesc }
+    }
+
+    case UPDATE_SORT: {
+      const { by, ascDesc } = action.payload.sort
+      return { ...state, sort: { by, ascDesc } }
     }
 
     case UPDATE_QUERY: {

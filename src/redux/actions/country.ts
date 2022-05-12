@@ -15,6 +15,8 @@ import {
   Query,
   FILTER_COUNTRIES,
   UPDATE_QUERY,
+  Sort,
+  UPDATE_SORT,
 } from '../../types'
 import { API_URL } from 'utils/constants'
 
@@ -65,6 +67,15 @@ export function updateSortAscDesc(sortAscDesc: SortAscDesc): CountryActions {
     type: UPDATE_SORT_ASC_DESC,
     payload: {
       sortAscDesc,
+    },
+  }
+}
+
+export function updateSort(sort: Sort): CountryActions {
+  return {
+    type: UPDATE_SORT,
+    payload: {
+      sort,
     },
   }
 }

@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
 import Table from 'react-bootstrap/Table'
 import { Link } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
-import { pickSome } from 'utils/services'
+import { useDispatch, useSelector } from 'react-redux'
+import { capitalizeFirstLetter, pickSome } from 'utils/services'
 import ThemeContext from 'contexts/Theme'
+import { FaSort, FaArrowUp, FaArrowDown } from 'react-icons/fa'
 
-import { Countries } from 'types'
-import { addCountry } from 'redux/actions'
+import { AppState, Countries, SortAscDesc, SortBy } from 'types'
+import { addCountry, updateSort } from 'redux/actions'
 
 const humanFormat = require('human-format')
 
@@ -17,30 +18,60 @@ type CustomTableProps = {
 
 const titles = [
   '#',
-  'Flag',
-  'Name',
-  'Language',
-  'Population',
-  'Area',
-  'Region',
-  'Actions',
+  'flag',
+  'name',
+  'language',
+  'population',
+  'area',
+  'region',
+  'actions',
 ]
+
+const sortLabels: SortBy[] = ['name', 'population', 'area', 'region']
 
 function CustomTable({ countries, currentIndex }: CustomTableProps) {
   const dispatch = useDispatch()
   const theme = useContext(ThemeContext)
+  const {
+    sort: { by, ascDesc },
+  } = useSelector((state: AppState) => state.country)
 
-  const makeSomeComponents = (arr: string[]) => {
-    const newArr = pickSome(arr, 2)
-    return newArr.map((l) => <li key={l}>{l}</li>)
+  const limitTo2Languages = (arr: string[]) => {
+    const some = pickSome(arr, 2)
+    return some.map((l) => <li key={l}>{l}</li>)
+  }
+
+  const makeTitle = (title: SortBy) => {
+    const isSortable = sortLabels.find((elem) => elem === title)
+    if (!isSortable) return capitalizeFirstLetter(title)
+
+    let order: SortAscDesc = 'ASC'
+    let icon = <FaSort />
+    if (by === title) {
+      order = ascDesc === 'ASC' ? 'DESC' : 'ASC'
+      if (order === 'ASC') icon = <FaArrowUp />
+      else icon = <FaArrowDown />
+    }
+
+    return (
+      <button
+        style={{ background: 'none', border: 'none' }}
+        onClick={() => {
+          dispatch(updateSort({ by: title, ascDesc: order }))
+        }}
+      >
+        {capitalizeFirstLetter(title)}
+        {icon}
+      </button>
+    )
   }
 
   return (
     <Table striped bordered hover responsive="sm">
       <thead>
         <tr>
-          {titles.map((t) => (
-            <th key={t}>{t}</th>
+          {titles.map((title) => (
+            <th key={title}>{makeTitle(title as SortBy)}</th>
           ))}
         </tr>
       </thead>
@@ -58,7 +89,7 @@ function CustomTable({ countries, currentIndex }: CustomTableProps) {
             <td>
               <ul>
                 {country.languages &&
-                  makeSomeComponents(Object.values(country.languages))}
+                  limitTo2Languages(Object.values(country.languages))}
               </ul>
             </td>
             <td>{humanFormat(country.population)}</td>

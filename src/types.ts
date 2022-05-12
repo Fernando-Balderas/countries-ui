@@ -5,6 +5,7 @@ export const ADD_COUNTRIES = 'ADD_COUNTRIES'
 export const SORT_COUNTRIES = 'SORT_COUNTRIES'
 export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
 export const UPDATE_SORT_ASC_DESC = 'UPDATE_SORT_ASC_DESC'
+export const UPDATE_SORT = 'UPDATE_SORT'
 export const UPDATE_QUERY = 'UPDATE_QUERY'
 export const FILTER_COUNTRIES = 'FILTER_COUNTRIES'
 
@@ -57,6 +58,11 @@ export type SortBy = keyof Country
 
 export type SortAscDesc = 'ASC' | 'DESC'
 
+export type Sort = {
+  by: SortBy
+  ascDesc: SortAscDesc
+}
+
 export type Query = string
 
 export enum ThemeColors {
@@ -94,6 +100,7 @@ export type CountryState = {
   inCart: Countries
   sortBy: SortBy
   sortAscDesc: SortAscDesc
+  sort: Sort
   query: Query
   filtered: Countries
 }
@@ -151,6 +158,13 @@ export type UpdateSortAscDesc = {
   }
 }
 
+export type UpdateSort = {
+  type: typeof UPDATE_SORT
+  payload: {
+    sort: Sort
+  }
+}
+
 export type UpdateQuery = {
   type: typeof UPDATE_QUERY
   payload: {
@@ -170,6 +184,7 @@ export type CountryActions =
   | SortCountriessAction
   | UpdateSortBy
   | UpdateSortAscDesc
+  | UpdateSort
   | UpdateQuery
   | FilterCountries
 

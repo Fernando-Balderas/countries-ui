@@ -57,3 +57,7 @@ export function pickSome(arr: string[], limit: number) {
 export function range(size: number, startAt = 0) {
   return [...Array(size).keys()].map((i) => i + startAt)
 }
+
+export function capitalizeFirstLetter(str: string) {
+  return str.charAt(0).toUpperCase() + str.slice(1)
+}

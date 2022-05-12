@@ -19,7 +19,7 @@ import {
 
 export default function Home() {
   const dispatch = useDispatch()
-  const { filtered, query, sortBy, sortAscDesc } = useSelector(
+  const { filtered, query, sort } = useSelector(
     (state: AppState) => state.country
   )
 
@@ -35,7 +35,7 @@ export default function Home() {
   useEffect(() => {
     // TODO: Possible improvement using selectors
     dispatch(sortCountries())
-  }, [dispatch, sortBy, sortAscDesc])
+  }, [dispatch, sort])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [productsPerPage] = useState(10)
