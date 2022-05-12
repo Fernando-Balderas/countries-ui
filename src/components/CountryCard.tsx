@@ -1,8 +1,10 @@
 import React from 'react'
+import { useHistory } from 'react-router-dom'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
 
 import { Currencies, Languages, Country } from 'types'
 
@@ -11,6 +13,7 @@ type CountryCardProps = {
 }
 
 function CountryCard({ country }: CountryCardProps) {
+  const history = useHistory()
   const makeLanguages = (languages: Languages) => {
     return Object.values(languages).map((lang) => (
       <Badge pill bg="secondary" key={lang}>
@@ -51,7 +54,7 @@ function CountryCard({ country }: CountryCardProps) {
         </Card.Subtitle>
       </Card.Header>
       <Card.Body>
-        <ListGroup className="list-group-flush">
+        <ListGroup className="list-group-flush text-center">
           <ListGroupItem>
             Language: {country.languages && makeLanguages(country.languages)}
           </ListGroupItem>
@@ -68,18 +71,23 @@ function CountryCard({ country }: CountryCardProps) {
           <ListGroupItem>
             Currency: {country.currencies && makeCurrencies(country.currencies)}
           </ListGroupItem>
+          <ListGroupItem>
+            <Card.Link aria-label="Google maps" href={country.maps.googleMaps}>
+              Google Maps
+            </Card.Link>
+            <Card.Link
+              aria-label="Openstreet maps"
+              href={country.maps.openStreetMaps}
+            >
+              OpenStreetMaps
+            </Card.Link>
+          </ListGroupItem>
         </ListGroup>
       </Card.Body>
       <Card.Footer className="text-center">
-        <Card.Link aria-label="Google maps" href={country.maps.googleMaps}>
-          Google Maps
-        </Card.Link>
-        <Card.Link
-          aria-label="Openstreet maps"
-          href={country.maps.openStreetMaps}
-        >
-          OpenStreetMaps
-        </Card.Link>
+        <Button variant="secondary" onClick={history.goBack}>
+          Back
+        </Button>
       </Card.Footer>
     </Card>
   )

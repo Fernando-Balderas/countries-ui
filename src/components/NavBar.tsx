@@ -6,13 +6,16 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge'
+import Button from 'react-bootstrap/Button'
 import { FaGlobeEurope, FaHeart, FaPalette, FaCircle } from 'react-icons/fa'
 import ThemeContext, { themes } from 'contexts/Theme'
+import { useHistory } from 'react-router-dom'
 
 import { ThemeKey, ThemeColors, AppState } from 'types'
 import { updateCartOpen } from '../redux/actions'
 
 function NavBar() {
+  const history = useHistory()
   const dispatch = useDispatch()
   const theme = useContext(ThemeContext)
   const { inCart } = useSelector((state: AppState) => state.country)
@@ -28,9 +31,11 @@ function NavBar() {
     >
       <Container>
         <Navbar.Brand
-          href="/"
-          aria-label="Home page"
+          as={Button}
+          onClick={() => history.push('/')}
+          className="nav-brand"
           style={{ color: theme.foreground }}
+          aria-label="Home page"
         >
           <FaGlobeEurope size="1.6em" /> Countries
         </Navbar.Brand>
