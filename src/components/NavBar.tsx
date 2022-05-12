@@ -6,12 +6,7 @@ import Container from 'react-bootstrap/Container'
 import Nav from 'react-bootstrap/Nav'
 import NavDropdown from 'react-bootstrap/NavDropdown'
 import Badge from 'react-bootstrap/Badge'
-import {
-  FaGlobeEurope,
-  FaShoppingCart,
-  FaPalette,
-  FaCircle,
-} from 'react-icons/fa'
+import { FaGlobeEurope, FaHeart, FaPalette, FaCircle } from 'react-icons/fa'
 import ThemeContext, { themes } from 'contexts/Theme'
 
 import { ThemeKey, ThemeColors, AppState } from 'types'
@@ -65,10 +60,7 @@ function NavBar() {
               ))}
             </NavDropdown>
             <Nav.Link aria-label="Cart" onClick={handleShowCart}>
-              <FaShoppingCart
-                size="1.6em"
-                style={{ color: theme.foreground }}
-              />
+              <FaHeart size="1.6em" style={{ color: theme.foreground }} />
               {inCart.length > 0 && <Badge bg="danger">{inCart.length}</Badge>}
             </Nav.Link>
           </Nav>

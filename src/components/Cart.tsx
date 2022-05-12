@@ -39,12 +39,12 @@ function Cart() {
     >
       <Offcanvas.Header closeButton>
         <Offcanvas.Title as="h2" id="cart-title">
-          Cart
+          Favourites
         </Offcanvas.Title>
       </Offcanvas.Header>
       <Offcanvas.Body>
         <Stack gap={0} className="mx-auto">
-          {inCart.length <= 0 && <div>No countries in cart</div>}
+          {inCart.length <= 0 && <div>Empty</div>}
           {inCart.map((country) => makeCard(country))}
         </Stack>
       </Offcanvas.Body>
