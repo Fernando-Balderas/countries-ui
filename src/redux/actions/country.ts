@@ -8,10 +8,6 @@ import {
   Countries,
   ADD_COUNTRIES,
   SORT_COUNTRIES,
-  SortBy,
-  UPDATE_SORT_BY,
-  SortAscDesc,
-  UPDATE_SORT_ASC_DESC,
   Query,
   FILTER_COUNTRIES,
   UPDATE_QUERY,
@@ -50,24 +46,6 @@ export function addCountries(countries: Countries): CountryActions {
 export function sortCountries(): CountryActions {
   return {
     type: SORT_COUNTRIES,
-  }
-}
-
-export function updateSortBy(sortBy: SortBy): CountryActions {
-  return {
-    type: UPDATE_SORT_BY,
-    payload: {
-      sortBy,
-    },
-  }
-}
-
-export function updateSortAscDesc(sortAscDesc: SortAscDesc): CountryActions {
-  return {
-    type: UPDATE_SORT_ASC_DESC,
-    payload: {
-      sortAscDesc,
-    },
   }
 }
 

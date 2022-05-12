@@ -5,8 +5,6 @@ import {
   REMOVE_COUNTRY,
   ADD_COUNTRIES,
   SORT_COUNTRIES,
-  UPDATE_SORT_BY,
-  UPDATE_SORT_ASC_DESC,
   FILTER_COUNTRIES,
   UPDATE_QUERY,
   UPDATE_SORT,
@@ -20,8 +18,6 @@ import {
 export const defaultCountryState: CountryState = {
   countries: [],
   inCart: [],
-  sortBy: 'name',
-  sortAscDesc: 'ASC',
   sort: {
     by: 'name',
     ascDesc: 'ASC',
@@ -59,8 +55,8 @@ export default function country(
       // TODO: Possible improvement using selectors
       const sorted = sortCountriesByCriteria(
         [...state.filtered, first],
-        state.sortBy,
-        state.sortAscDesc
+        state.sort.by,
+        state.sort.ascDesc
       )
       return {
         ...state,
@@ -81,18 +77,6 @@ export default function country(
         state.sort.ascDesc
       )
       return { ...state, filtered: sorted }
-    }
-
-    case UPDATE_SORT_BY: {
-      const { sortBy } = action.payload
-      if (state.sortBy === sortBy) return state
-      return { ...state, sortBy: sortBy }
-    }
-
-    case UPDATE_SORT_ASC_DESC: {
-      const { sortAscDesc } = action.payload
-      if (state.sortAscDesc === sortAscDesc) return state
-      return { ...state, sortAscDesc: sortAscDesc }
     }
 
     case UPDATE_SORT: {

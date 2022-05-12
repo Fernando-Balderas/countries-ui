@@ -98,8 +98,6 @@ export enum DialogType {
 export type CountryState = {
   countries: Countries
   inCart: Countries
-  sortBy: SortBy
-  sortAscDesc: SortAscDesc
   sort: Sort
   query: Query
   filtered: Countries
@@ -144,20 +142,6 @@ export type SortCountriessAction = {
   type: typeof SORT_COUNTRIES
 }
 
-export type UpdateSortBy = {
-  type: typeof UPDATE_SORT_BY
-  payload: {
-    sortBy: SortBy
-  }
-}
-
-export type UpdateSortAscDesc = {
-  type: typeof UPDATE_SORT_ASC_DESC
-  payload: {
-    sortAscDesc: SortAscDesc
-  }
-}
-
 export type UpdateSort = {
   type: typeof UPDATE_SORT
   payload: {
@@ -182,8 +166,6 @@ export type CountryActions =
   | RemoveCountryAction
   | AddCountriesAction
   | SortCountriessAction
-  | UpdateSortBy
-  | UpdateSortAscDesc
   | UpdateSort
   | UpdateQuery
   | FilterCountries

@@ -44,7 +44,6 @@ function CustomTable({ countries, currentIndex }: CustomTableProps) {
   const makeTitle = (title: SortBy) => {
     const isSortable = sortLabels.find((elem) => elem === title)
     if (!isSortable) return capitalizeFirstLetter(title)
-
     let order: SortAscDesc = 'ASC'
     let icon = <FaSort />
     if (by === title) {
@@ -52,7 +51,6 @@ function CustomTable({ countries, currentIndex }: CustomTableProps) {
       if (order === 'ASC') icon = <FaArrowUp />
       else icon = <FaArrowDown />
     }
-
     return (
       <button
         style={{ background: 'none', border: 'none' }}
