@@ -1,5 +1,6 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
+import { Link } from 'react-router-dom'
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Stack from 'react-bootstrap/Stack'
 import Alert from 'react-bootstrap/Alert'
@@ -16,10 +17,15 @@ function Cart() {
   const handleClose = () => dispatch(updateCartOpen(false))
 
   const makeCard = (country: Country) => (
-    // TODO: Add link to country detail
-
     <Alert key={`incart-${country.cca3}`} variant="light" className="p-0">
-      {`${country.flag} ${country.name.common}`}
+      {country.flag}
+      <Link
+        to={`/countries/${country.cca3}`}
+        className="ms-2"
+        aria-label="Country details"
+      >
+        {country.name.common}
+      </Link>
       <Button
         variant="outline-danger"
         className="mx-1"

@@ -1,18 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { useHistory } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import Card from 'react-bootstrap/Card'
 import ListGroup from 'react-bootstrap/ListGroup'
 import ListGroupItem from 'react-bootstrap/ListGroupItem'
 import Badge from 'react-bootstrap/Badge'
 import Button from 'react-bootstrap/Button'
+import ThemeContext from 'contexts/Theme'
 
 import { Currencies, Languages, Country } from 'types'
+import { addCountry } from 'redux/actions'
 
 type CountryCardProps = {
   country: Country
 }
 
 function CountryCard({ country }: CountryCardProps) {
+  const dispatch = useDispatch()
+  const theme = useContext(ThemeContext)
   const history = useHistory()
   const makeLanguages = (languages: Languages) => {
     return Object.values(languages).map((lang) => (
@@ -37,8 +42,6 @@ function CountryCard({ country }: CountryCardProps) {
       </Badge>
     ))
   }
-
-  // TODO: Add favourites button in this card also
 
   return (
     <Card aria-labelledby="card-title">
@@ -86,10 +89,17 @@ function CountryCard({ country }: CountryCardProps) {
           </ListGroupItem>
         </ListGroup>
       </Card.Body>
-      <Card.Footer className="text-center">
+      <Card.Footer className="flex-center">
         <Button variant="secondary" onClick={history.goBack}>
           Back
         </Button>
+        <button
+          className={`button btn-theme-${theme.name}`}
+          aria-label="Add country"
+          onClick={() => dispatch(addCountry(country))}
+        >
+          Add
+        </button>
       </Card.Footer>
     </Card>
   )

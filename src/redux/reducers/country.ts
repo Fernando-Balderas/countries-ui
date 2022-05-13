@@ -34,16 +34,15 @@ export default function country(
   switch (action.type) {
     case ADD_COUNTRY: {
       const { country } = action.payload
-      if (state.inCart.find((p) => p.cca3 === country.cca3)) {
+      if (state.inCart.find((c) => c.cca3 === country.cca3)) {
         return state
       }
       const index = state.filtered.findIndex((c) => c.cca3 === country.cca3)
-      if (index === -1) return state
-      const [first] = state.filtered.splice(index, 1)
+      if (index > -1) state.filtered.splice(index, 1)
       return {
         ...state,
         filtered: [...state.filtered],
-        inCart: [...state.inCart, first],
+        inCart: [...state.inCart, country],
       }
     }
 
