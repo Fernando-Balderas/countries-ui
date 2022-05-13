@@ -1,4 +1,24 @@
-# Fast Track React app template with TypeScript & Redux 
+# Frontend Countries
+This app shows a table of countries extracted from an API. As a user, you can easily find a country by typing the name, region or subregion into search input. Another way is navigating page by page with the pagination options below the table. Sorting options are provided in table headings marked with icons. Sorting arranges iterates over ascending and descending by clicking over a heading. You can like a country by clicking Add button and add it to favourites. Dislike is also available with the Remove button into favourites right side-bar. Country’s full information can be reached by clicking its name, then you’ll navigate to its page; is also possible to like a country on this page. Finally, the theme colour can be changed with an icon in the navigation bar.
+
+## Features
+- Fetch countries data with Redux-thunk
+- Show a portion of countries using a custom pagination
+- Search a country by its name, region or subregion
+- Sort countries by name, population, area, and region
+- Change themes using context hook
+- Add/Remove coutries to favourites
+- Show a country in detail
+- Accessibility labels
+## Technologies
+- React
+- Redux
+- Bootstrap
+- SASS
+- React Icons
+- [Countries API](https://restcountries.com/)
+
+---
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Installation
