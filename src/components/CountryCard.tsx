@@ -38,6 +38,8 @@ function CountryCard({ country }: CountryCardProps) {
     ))
   }
 
+  // TODO: Add favourites button in this card also
+
   return (
     <Card aria-labelledby="card-title">
       <Card.Img

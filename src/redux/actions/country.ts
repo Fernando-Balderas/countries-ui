@@ -10,7 +10,6 @@ import {
   SORT_COUNTRIES,
   Query,
   FILTER_COUNTRIES,
-  UPDATE_QUERY,
   Sort,
   UPDATE_SORT,
 } from '../../types'
@@ -58,18 +57,12 @@ export function updateSort(sort: Sort): CountryActions {
   }
 }
 
-export function updateQuery(query: Query): CountryActions {
+export function filterCountries(query: Query): CountryActions {
   return {
-    type: UPDATE_QUERY,
+    type: FILTER_COUNTRIES,
     payload: {
       query,
     },
-  }
-}
-
-export function filterCountries(): CountryActions {
-  return {
-    type: FILTER_COUNTRIES,
   }
 }
 
@@ -82,7 +75,6 @@ export function fetchCountries() {
       .then((countries) => {
         dispatch(addCountries(countries))
       })
-      .then(() => dispatch(filterCountries()))
-      .then(() => dispatch(sortCountries()))
+      .then(() => dispatch(filterCountries('')))
   }
 }

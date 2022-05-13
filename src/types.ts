@@ -6,7 +6,6 @@ export const SORT_COUNTRIES = 'SORT_COUNTRIES'
 export const UPDATE_SORT_BY = 'UPDATE_SORT_BY'
 export const UPDATE_SORT_ASC_DESC = 'UPDATE_SORT_ASC_DESC'
 export const UPDATE_SORT = 'UPDATE_SORT'
-export const UPDATE_QUERY = 'UPDATE_QUERY'
 export const FILTER_COUNTRIES = 'FILTER_COUNTRIES'
 
 export const UPDATE_THEME_KEY = 'UPDATE_THEME_KEY'
@@ -149,15 +148,11 @@ export type UpdateSort = {
   }
 }
 
-export type UpdateQuery = {
-  type: typeof UPDATE_QUERY
+export type FilterCountries = {
+  type: typeof FILTER_COUNTRIES
   payload: {
     query: Query
   }
-}
-
-export type FilterCountries = {
-  type: typeof FILTER_COUNTRIES
 }
 
 // Use this union in reducer
@@ -167,7 +162,6 @@ export type CountryActions =
   | AddCountriesAction
   | SortCountriessAction
   | UpdateSort
-  | UpdateQuery
   | FilterCountries
 
 export type UpdateThemeKeyAction = {

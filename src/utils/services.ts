@@ -29,6 +29,13 @@ export function sortCountriesByCriteria(
   )
 }
 
+export function removeCountriesInCart(countries: Countries, inCart: Countries) {
+  return countries.filter((country) => {
+    const index = inCart.findIndex((incart) => country.cca3 === incart.cca3)
+    return index === -1 ? true : false
+  })
+}
+
 function includesQuery(v: string, query: Query) {
   return v.toLowerCase().includes(query.toLowerCase())
 }

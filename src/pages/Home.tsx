@@ -11,31 +11,23 @@ import CustomPagination from 'components/CustomPagination'
 import Footer from 'components/Footer'
 
 import { AppState, FnPaginate } from '../types'
-import {
-  fetchCountries,
-  sortCountries,
-  filterCountries,
-} from '../redux/actions'
+import { fetchCountries, sortCountries } from '../redux/actions'
 
 export default function Home() {
   const dispatch = useDispatch()
-  const { filtered, query, sort } = useSelector(
+  const { countries, filtered, query, sort } = useSelector(
     (state: AppState) => state.country
   )
 
   useEffect(() => {
-    dispatch(fetchCountries())
-  }, [dispatch])
+    if (countries.length === 0) {
+      dispatch(fetchCountries())
+    }
+  }, [dispatch, countries])
 
   useEffect(() => {
-    dispatch(filterCountries())
     dispatch(sortCountries())
-  }, [dispatch, query])
-
-  useEffect(() => {
-    // TODO: Possible improvement using selectors
-    dispatch(sortCountries())
-  }, [dispatch, sort])
+  }, [dispatch, countries, sort, query])
 
   const [currentPage, setCurrentPage] = useState(1)
   const [productsPerPage] = useState(10)
@@ -43,8 +35,6 @@ export default function Home() {
   const indexOfLastProduct = currentPage * productsPerPage
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage
   const paginated = filtered.slice(indexOfFirstProduct, indexOfLastProduct)
-
-  // TODO: Fix duplicated countries in table and cart when go back to home page
 
   const paginate: FnPaginate = ({ pageNumber }) => setCurrentPage(pageNumber)
 

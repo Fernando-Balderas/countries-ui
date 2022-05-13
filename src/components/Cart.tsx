@@ -16,6 +16,8 @@ function Cart() {
   const handleClose = () => dispatch(updateCartOpen(false))
 
   const makeCard = (country: Country) => (
+    // TODO: Add link to country detail
+
     <Alert key={`incart-${country.cca3}`} variant="light" className="p-0">
       {`${country.flag} ${country.name.common}`}
       <Button

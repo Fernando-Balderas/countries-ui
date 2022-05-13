@@ -5,7 +5,7 @@ import Col from 'react-bootstrap/Col'
 import Form from 'react-bootstrap/Form'
 
 import { AppState, Query } from 'types'
-import { updateQuery } from 'redux/actions'
+import { filterCountries } from 'redux/actions'
 
 function SearchOptions() {
   const dispatch = useDispatch()
@@ -22,7 +22,7 @@ function SearchOptions() {
             type="text"
             placeholder="Search by name, region or subregion"
             value={query}
-            onChange={(e) => dispatch(updateQuery(e.target.value as Query))}
+            onChange={(e) => dispatch(filterCountries(e.target.value as Query))}
             style={{ borderRadius: '20px' }}
             aria-labelledby="search-label"
           />
