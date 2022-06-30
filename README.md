@@ -18,7 +18,21 @@ This app shows a table of countries extracted from an API. As a user, you can ea
 - React Icons
 - [Countries API](https://restcountries.com/)
 
+## Docker
+```bash
+# create image
+docker build -t countries-ui:1.0.0 .
+# start app
+docker run --rm -p 3001:3000 countries-ui:1.0.0
+# open link in a browser
+http://localhost:3001
+# Upoad image to docker hub
+docker tag countries-ui:1.0.0 fbalderasd/countries-ui:1.0.0
+docker push fbalderasd/countries-ui:1.0.0
+```
+
 ---
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Installation
