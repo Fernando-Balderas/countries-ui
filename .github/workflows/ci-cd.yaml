@@ -20,6 +20,14 @@ jobs:
           node-version: 16.x
       - name: Checkout
         uses: actions/checkout@v3
+      - name: Setup cache
+        uses: actions/cache@v3
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-npm-
+            ${{ runner.os }}-
       - name: Install packages
         run: npm install
       - name: Lint
