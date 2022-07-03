@@ -53,7 +53,10 @@ jobs:
         run: npm run build
 
       - name: Echo
-        run: echo ${{ secrets.NETLIFY_AUTH_TOKEN }} ${{ secrets.NETLIFY_PAGE_ID }}
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_PAGE_ID: ${{ secrets.NETLIFY_PAGE_ID }}
+        run: echo env
 
       - name: Deploy to Netlify
         uses: netlify/actions/cli@master
