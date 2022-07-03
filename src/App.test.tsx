@@ -1,9 +1,9 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import App from './App';
+import React from 'react'
+import { render } from '@testing-library/react'
+import Footer from 'components/Footer'
 
-test('renders learn react link', () => {
-  const { getByText } = render(<App />);
-  const linkElement = getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
-});
+test('renders footer', () => {
+  const { getByText } = render(<Footer />)
+  const element = getByText(/2022 Fernando Balderas/i)
+  expect(element).toBeInTheDocument()
+})
