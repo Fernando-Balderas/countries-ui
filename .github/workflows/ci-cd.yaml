@@ -18,28 +18,44 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: 16.x
+
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Setup cache
+
+      - name: Cache node modules
+        id: cache-npm
         uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
         with:
           path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-npm-
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
             ${{ runner.os }}-
+
+      - if: ${{ steps.cache-npm.outputs.cache-hit == 'false' }}
+        name: List the state of node modules
+        continue-on-error: true
+        run: npm list
+
       - name: Install packages
         run: npm install
+
       - name: Lint
         run: npm run lint
+
       - name: Tests
         run: npm run test
+
       - name: Build
         run: npm run build
-      # - name: Deploy to Netlify
-      #   uses: netlify/actions/cli@master
-      #   with:
-      #     args: deploy --dir=build --prod
-      #   env:
-      #     NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
-      #     NETLIFY_PAGE_ID: ${{ secrets.NETLIFY_PAGE_ID }}
+
+      - name: Deploy to Netlify
+        uses: netlify/actions/cli@master
+        env:
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+          NETLIFY_PAGE_ID: ${{ secrets.NETLIFY_PAGE_ID }}
+        with:
+          args: deploy --dir=build --prod
